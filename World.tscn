@@ -30,6 +30,4 @@ current = true
 script = ExtResource( 2 )
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( -0.0185168, -0.999829, -4.37039e-08, 0, -4.37114e-08, 1, -0.999829, 0.0185168, 8.09397e-10, 0, 30, 0 )
-current = true
-far = 8192.0
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 30, 0 )
