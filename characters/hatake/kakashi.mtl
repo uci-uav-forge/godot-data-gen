@@ -1,0 +1,58 @@
+# 3ds Max Wavefront OBJ Exporter v0.99 - (c)2007 guruware
+# File Created: 15.08.2022 15:37:17
+
+newmtl sharingan
+	Ns 32.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.4471 0.5490 0.7059
+	Kd 0.4471 0.5490 0.7059
+	Ks 0.3500 0.3500 0.3500
+	Ke 0.0000 0.0000 0.0000
+	map_Ka D:\on sell\Character\kakashi\texture\sharingan.png
+	map_Kd D:\on sell\Character\kakashi\texture\sharingan.png
+
+newmtl tangan
+	Ns 32.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.4471 0.5490 0.7059
+	Kd 0.4471 0.5490 0.7059
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka D:\on sell\Character\kakashi\texture\tangan.png
+	map_Kd D:\on sell\Character\kakashi\texture\tangan.png
+
+newmtl mata
+	Ns 32.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.4471 0.5490 0.7059
+	Kd 0.4471 0.5490 0.7059
+	Ks 0.3500 0.3500 0.3500
+	Ke 0.0000 0.0000 0.0000
+	map_Ka D:\on sell\Character\kakashi\texture\mata.png
+	map_Kd D:\on sell\Character\kakashi\texture\mata.png
+
+newmtl badan
+	Ns 32.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.4471 0.5490 0.7059
+	Kd 0.4471 0.5490 0.7059
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka D:\on sell\Character\kakashi\texture\badan.png
+	map_Kd D:\on sell\Character\kakashi\texture\badan.png

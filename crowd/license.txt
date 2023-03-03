@@ -1,0 +1,11 @@
+Model Information:
+* title:	populate models
+* source:	https://sketchfab.com/3d-models/populate-models-f93c7b439e6746f9a2d5963e628a5c4e
+* author:	vicente betoret ferrero (https://sketchfab.com/deathcow)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "populate models" (https://sketchfab.com/3d-models/populate-models-f93c7b439e6746f9a2d5963e628a5c4e) by vicente betoret ferrero (https://sketchfab.com/deathcow) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

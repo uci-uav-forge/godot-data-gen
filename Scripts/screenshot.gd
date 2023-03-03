@@ -1,24 +1,24 @@
 extends Camera
+
+# get characters from here: https://sketchfab.com/apatel/collections/dl-humanoid-characters-2912fdee14b24cafaaa26f3a961b6606
+
 # attach this to a Camera node and 
 # it'll take a screenshot once the 
 # scene starts running
 var first = true
-
+var root
 func _ready():
-	pass
+	root = get_tree().get_root().get_node("Root")
 	#get_viewport().set_clear_mode(Viewport.CLEAR_MODE_ONLY_NEXT_FRAME)	
 
 func prepForSegmentation(node, color: Color):
 	if node is MeshInstance:
 		# make material 
-		for surface_idx in range(node.mesh.get_surface_count()):
-			node.mesh = node.mesh.duplicate()
-			node.mesh.surface_set_material(surface_idx, SpatialMaterial.new())
-			node.mesh.surface_get_material(surface_idx).flags_unshaded = true
-			node.mesh.surface_get_material(surface_idx).albedo_color = color
+
+		node.material_override = SpatialMaterial.new()
+		node.material_override.flags_unshaded=true
+		node.material_override.albedo_color = color
 	else:
-		if node == null:
-			return
 		for child in node.get_children():
 			prepForSegmentation(child, color)
 
@@ -32,12 +32,12 @@ func _process(_delta):
 		var scene = preload("res://Naruto.tscn")
 		var new_naruto = scene.instance()
 		new_naruto.scale = Vector3(0.05,0.05,0.05)
-		get_tree().get_root().get_node("Root").add_child(new_naruto)
+		root.add_child(new_naruto)
 		takeScreenshot("image.png")
 		yield(VisualServer, "frame_post_draw")
 		prepForSegmentation(new_naruto, Color(1,0,0))
-		
-		#prepForSegmentation(get_node("Floor"), Color(0,0,0))
+		prepForSegmentation(root.get_node("Floor"), Color(0,0,0))
 		takeScreenshot("mask.png")
 		yield(VisualServer, "frame_post_draw")
+		get_tree().reload_current_scene()
 		first=false
