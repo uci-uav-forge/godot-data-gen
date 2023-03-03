@@ -1,5 +1,0 @@
-[gd_scene load_steps=2 format=2]
-
-[ext_resource path="res://titan/Armored Titan/Armored Titan.glb" type="PackedScene" id=1]
-
-[node name="Armored Titan" instance=ExtResource( 1 )]

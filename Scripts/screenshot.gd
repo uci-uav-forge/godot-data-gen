@@ -29,15 +29,14 @@ func takeScreenshot(file_name):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if first:
-		var scene = preload("res://Naruto.tscn")
-		var new_naruto = scene.instance()
-		new_naruto.scale = Vector3(0.05,0.05,0.05)
-		root.add_child(new_naruto)
+		var scene = preload("res://people.tscn")
+		var ppl = scene.instance()
+		root.add_child(ppl)
 		takeScreenshot("image.png")
 		yield(VisualServer, "frame_post_draw")
-		prepForSegmentation(new_naruto, Color(1,0,0))
+		prepForSegmentation(ppl, Color(1,0,0))
 		prepForSegmentation(root.get_node("Floor"), Color(0,0,0))
 		takeScreenshot("mask.png")
 		yield(VisualServer, "frame_post_draw")
-		get_tree().reload_current_scene()
+		#get_tree().reload_current_scene()
 		first=false
