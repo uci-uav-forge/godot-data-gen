@@ -12,3 +12,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="Object_4" parent="Sketchfab_model/populatefbx/Object_2/RootNode" index="0"]
 transform = Transform( 0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0 )
+
+[node name="Skeleton" parent="Sketchfab_model/populatefbx/Object_2/RootNode/Object_4" index="0"]
+visible = false
