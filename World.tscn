@@ -1,6 +1,5 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://people.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/screenshot.gd" type="Script" id=2]
 [ext_resource path="res://backgrounds/airport_1.png" type="Texture" id=6]
 
@@ -31,7 +30,6 @@ current = true
 script = ExtResource( 2 )
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.905176, 0.425037, 0, -0.425037, 0.905176, 0, 6.7223, 15.7756 )
+transform = Transform( -0.0185168, -0.999829, -4.37039e-08, 0, -4.37114e-08, 1, -0.999829, 0.0185168, 8.09397e-10, 0, 30, 0 )
 current = true
-
-[node name="scene" parent="." instance=ExtResource( 1 )]
+far = 8192.0
