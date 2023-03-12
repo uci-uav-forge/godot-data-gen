@@ -64,8 +64,7 @@ func gen_train_image():
 	if (randi()%2)>0:
 		var random_person = just_people_nodes[randi()%len(just_people_nodes)].duplicate()
 		root.add_child(random_person)
-		random_person.translation= 10 * Vector3(randf()-0.5,randf()-0.5,randf()-0.5)
-		random_person.rotate_y(randf()*TAU)
+		random_person.translation= Vector3.ZERO
 		random_person.scale=Vector3.ONE*0.05
 		target_objects.append(random_person)
 		target_labels.append("person")
@@ -75,12 +74,14 @@ func gen_train_image():
 		var shape = shape_and_name[0]
 		var shape_name = shape_and_name[1]
 		root.add_child(shape)
-		shape.translation = 10 * Vector3(randf()-0.5,randf()-0.5,randf()-0.5)
-		shape.rotate_y(randf()*TAU)
+		shape.translation = 0.01*Vector3.UP
 		target_objects.append(shape)
 		target_labels.append(shape_name)
-		print(shape_name)
 	
+	for obj in target_objects:
+		obj.rotate_y(randf()*TAU)
+		obj.translate(20 * Vector3(randf()-0.5,0,randf()-0.5))
+
 	yield(VisualServer, "frame_post_draw")
 	takeScreenshot("images/image%s.png" % index)
 	prepForSegmentation(root.get_node("Floor"), Color(0,0,0))
