@@ -54,11 +54,8 @@ func makeShapeTarget():
 	shape.add_child(label)
 	label.translate(Vector3(0,0.01,0))
 	return [shape, shape.name]
-	
 
-func gen_train_image():
-	print("gen image")
-	scene_ready = false
+func get_target_objects_and_labels():
 	var target_objects = []
 	var target_labels = []
 	if (randi()%2)>0:
@@ -77,6 +74,13 @@ func gen_train_image():
 		shape.translation = 0.01*Vector3.UP
 		target_objects.append(shape)
 		target_labels.append(shape_name)
+	return [target_objects, target_labels]
+
+func gen_train_image():
+	scene_ready = false
+	var target_objects_and_labels = get_target_objects_and_labels()
+	var target_objects = target_objects_and_labels[0]
+	var target_labels = target_objects_and_labels[1]
 	
 	for obj in target_objects:
 		obj.rotate_y(randf()*TAU)
@@ -84,17 +88,18 @@ func gen_train_image():
 
 	yield(VisualServer, "frame_post_draw")
 	takeScreenshot("images/image%s.png" % index)
-	prepForSegmentation(root.get_node("Floor"), Color(0,0,0))
-	
+
+	prepForSegmentation(root.get_node("Floor"), Color.black)
 	for obj in target_objects:
 		obj.hide()
+	
 	for i in target_objects.size():
 		target_objects[i].show()
-		prepForSegmentation(target_objects[i], Color(1,1,1))
+		prepForSegmentation(target_objects[i], Color.white)
 		yield(VisualServer, "frame_post_draw")
 		takeScreenshot("masks/mask%s%s%s.png" % [index, target_labels[i], i])
-		yield(VisualServer, "frame_post_draw")
 		target_objects[i].free()
+	
 	root.get_node("Floor").material_override = null
 	index += 1
 	scene_ready = true
