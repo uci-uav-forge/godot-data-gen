@@ -7,6 +7,8 @@ onready var just_people_nodes = []
 onready var shapes_list = preload("res://Shapes.tscn").instance().get_children()
 onready var symbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 onready var res_directory = Directory.new()
+onready var global_light: Light = root.get_node("Light")
+onready var world_floor = root.get_node("Floor")
 
 func _ready():
 	randomize()
@@ -77,7 +79,8 @@ func get_target_objects_and_labels():
 	return [target_objects, target_labels]
 
 func gen_train_image():
-	scene_ready = false
+	scene_ready = false	
+	res_directory.make_dir("masks/%s" % index)
 	var target_objects_and_labels = get_target_objects_and_labels()
 	var target_objects = target_objects_and_labels[0]
 	var target_labels = target_objects_and_labels[1]
@@ -86,10 +89,12 @@ func gen_train_image():
 		obj.rotate_y(randf()*TAU)
 		obj.translate(20 * Vector3(randf()-0.5,0,randf()-0.5))
 
+	global_light.light_energy = randf()*1.2
+	world_floor.rotate_y(randf()*TAU)
 	yield(VisualServer, "frame_post_draw")
 	takeScreenshot("images/image%s.png" % index)
 
-	prepForSegmentation(root.get_node("Floor"), Color.black)
+	prepForSegmentation(world_floor, Color.black)
 	for obj in target_objects:
 		obj.hide()
 	
@@ -97,10 +102,10 @@ func gen_train_image():
 		target_objects[i].show()
 		prepForSegmentation(target_objects[i], Color.white)
 		yield(VisualServer, "frame_post_draw")
-		takeScreenshot("masks/mask%s%s%s.png" % [index, target_labels[i], i])
+		takeScreenshot("masks/%s/%s_%s.png" % [index, target_labels[i], i])
 		target_objects[i].free()
 	
-	root.get_node("Floor").material_override = null
+	world_floor.material_override = null
 	index += 1
 	scene_ready = true
 
