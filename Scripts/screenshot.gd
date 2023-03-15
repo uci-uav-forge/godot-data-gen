@@ -87,10 +87,12 @@ func gen_train_image():
 	
 	for obj in target_objects:
 		obj.rotate_y(randf()*TAU)
-		obj.translate(20 * Vector3(randf()-0.5,0,randf()-0.5))
+		obj.translate(30 * Vector3(randf()-0.5,0,randf()-0.5))
+		obj.scale_object_local(rand_range(0.3, 1.1)*Vector3(rand_range(0.8, 1.2),rand_range(0.8, 1.2),rand_range(0.8, 1.2)))
 
 	global_light.light_energy = randf()*1.2
-	world_floor.rotate_y(randf()*TAU)
+
+	self.rotation_degrees = Vector3(rand_range(-80, -100), rand_range(0,360), rand_range(0, 360))
 	yield(VisualServer, "frame_post_draw")
 	takeScreenshot("images/image%s.png" % index)
 
