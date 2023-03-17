@@ -87,8 +87,8 @@ func gen_train_image():
 	
 	for obj in target_objects:
 		obj.rotate_y(randf()*TAU)
-		obj.translate(30 * Vector3(randf()-0.5,0,randf()-0.5))
-		obj.scale_object_local(rand_range(0.3, 1.1)*Vector3(rand_range(0.8, 1.2),rand_range(0.8, 1.2),rand_range(0.8, 1.2)))
+		obj.translate(50 * Vector3(randf()-0.5,0,randf()-0.5))
+		obj.scale_object_local(rand_range(0.3, 1.7)*Vector3(rand_range(0.8, 1.2),rand_range(0.8, 1.2),rand_range(0.8, 1.2)))
 
 	global_light.light_energy = randf()*1.2
 
