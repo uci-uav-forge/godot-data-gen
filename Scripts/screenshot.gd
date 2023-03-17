@@ -9,6 +9,25 @@ onready var symbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 onready var res_directory = Directory.new()
 onready var global_light: Light = root.get_node("Light")
 onready var world_floor = root.get_node("Floor")
+var backgrounds_directory_list
+
+# https://godotengine.org/qa/5175/how-to-get-all-the-files-inside-a-folder
+func list_files_in_directory(path):
+	var files = []
+	var dir = Directory.new()
+	dir.open(path)
+	dir.list_dir_begin()
+
+	while true:
+		var file = dir.get_next()
+		if file == "":
+			break
+		elif not file.begins_with(".") and not file.ends_with(".import"):
+			files.append(file)
+
+	dir.list_dir_end()
+
+	return files
 
 func _ready():
 	randomize()
@@ -16,6 +35,8 @@ func _ready():
 	res_directory.open("/tmp")
 	res_directory.make_dir("images")
 	res_directory.make_dir("masks")
+	
+	backgrounds_directory_list = list_files_in_directory("res://backgrounds")
 
 	var scene = preload("res://people.tscn")
 	var ppl = scene.instance()
@@ -91,8 +112,13 @@ func gen_train_image():
 		obj.scale_object_local(rand_range(0.3, 1.7)*Vector3(rand_range(0.8, 1.2),rand_range(0.8, 1.2),rand_range(0.8, 1.2)))
 
 	global_light.light_energy = randf()*1.2
-
 	self.rotation_degrees = Vector3(rand_range(-80, -100), rand_range(0,360), rand_range(0, 360))
+	var background_path = backgrounds_directory_list[randi()%len(backgrounds_directory_list)]
+	var background = load("res://backgrounds/%s" % background_path)
+	world_floor.material_override = SpatialMaterial.new()
+	world_floor.material_override.albedo_texture = background
+	world_floor.scale = Vector3(rand_range(50, 100), 0.001, rand_range(50, 100))
+	
 	yield(VisualServer, "frame_post_draw")
 	takeScreenshot("images/image%s.png" % index)
 
