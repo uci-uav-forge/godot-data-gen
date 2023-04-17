@@ -9,6 +9,8 @@ onready var symbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 onready var res_directory = Directory.new()
 onready var global_light: Light = root.get_node("Light")
 onready var world_floor = root.get_node("Floor")
+onready var opensans_bold_font = preload("res://fonts/OpenSans/OpenSans-Bold.ttf")
+onready var data_folder_name = "godot_data"
 var backgrounds_directory_list
 
 # https://godotengine.org/qa/5175/how-to-get-all-the-files-inside-a-folder
@@ -33,6 +35,8 @@ func _ready():
 	randomize()
 	
 	res_directory.open("/tmp")
+	res_directory.make_dir(data_folder_name)
+	res_directory.open("/tmp/%s" % data_folder_name)
 	res_directory.make_dir("images")
 	res_directory.make_dir("masks")
 	
@@ -61,7 +65,8 @@ func prepForSegmentation(node, color: Color):
 
 func takeScreenshot(file_name):
 	var image = get_viewport().get_texture().get_data()
-	image.save_png("/tmp/%s" % file_name)
+	print("/tmp/%s/%s" % [data_folder_name,file_name])
+	image.save_png("/tmp/%s/%s" % [data_folder_name,file_name])
 	
 func makeShapeTarget():
 	var shape = shapes_list[randi()%len(shapes_list)].duplicate()
@@ -70,7 +75,7 @@ func makeShapeTarget():
 	var label = Label3D.new()
 	label.text = symbols[randi()%len(symbols)]
 	label.font = DynamicFont.new()
-	label.font.font_data = load("res://fonts/OpenSans/OpenSans-Bold.ttf")
+	label.font.font_data = opensans_bold_font
 	label.font.size = 100
 	label.modulate = Color(randf(), randf(), randf())
 	label.rotate_x(-PI/2)
@@ -85,7 +90,7 @@ func get_target_objects_and_labels():
 		var random_person = just_people_nodes[randi()%len(just_people_nodes)].duplicate()
 		root.add_child(random_person)
 		random_person.translation= Vector3.ZERO
-		random_person.scale=Vector3.ONE*0.05
+		random_person.scale=Vector3.ONE*0.5
 		target_objects.append(random_person)
 		target_labels.append("person")
 	var num_shapes = randi()%10
@@ -95,6 +100,7 @@ func get_target_objects_and_labels():
 		var shape_name = shape_and_name[1]
 		root.add_child(shape)
 		shape.translation = 0.01*Vector3.UP
+		shape.scale=Vector3.ONE*1.5
 		target_objects.append(shape)
 		target_labels.append(shape_name)
 	return [target_objects, target_labels]
@@ -109,7 +115,7 @@ func gen_train_image():
 	for obj in target_objects:
 		obj.rotate_y(randf()*TAU)
 		obj.translate(50 * Vector3(randf()-0.5,0,randf()-0.5))
-		obj.scale_object_local(rand_range(0.3, 1.7)*Vector3(rand_range(0.8, 1.2),rand_range(0.8, 1.2),rand_range(0.8, 1.2)))
+		obj.scale_object_local(rand_range(0.9, 1.1)*Vector3(rand_range(0.8, 1.2),rand_range(0.8, 1.2),rand_range(0.8, 1.2)))
 
 	global_light.light_energy = randf()*1.2
 	self.rotation_degrees = Vector3(rand_range(-80, -100), rand_range(0,360), rand_range(0, 360))
@@ -135,9 +141,12 @@ func gen_train_image():
 	
 	world_floor.material_override = null
 	index += 1
+	yield(VisualServer, "frame_post_draw")
 	scene_ready = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if scene_ready:
 		gen_train_image()
+		if index>= 10_000:
+			get_tree().quit()
