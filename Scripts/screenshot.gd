@@ -124,7 +124,7 @@ func gen_train_image():
 	for obj in target_objects:
 		obj.rotate_y(randf()*TAU)
 		obj.translation+=picture_center + positions.pop_front() + Vector3(randf()-0.5, 0, randf()-0.5)
-		obj.scale_object_local(rand_range(0.9, 1.1)*Vector3(rand_range(0.8, 1.2),rand_range(0.8, 1.2),rand_range(0.8, 1.2)))
+		obj.scale_object_local(rand_range(0.9, 1.1)*Vector3(rand_range(0.6, 1.2),rand_range(0.6, 1.2),rand_range(0.6, 1.2)))
 
 	global_light.light_energy = randf()*3
 	var background_path = backgrounds_directory_list[randi()%len(backgrounds_directory_list)]
