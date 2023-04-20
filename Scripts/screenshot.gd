@@ -126,7 +126,7 @@ func gen_train_image():
 		obj.translation+=picture_center + positions.pop_front() + Vector3(randf()-0.5, 0, randf()-0.5)
 		obj.scale_object_local(rand_range(0.9, 1.1)*Vector3(rand_range(0.6, 1.2),rand_range(0.6, 1.2),rand_range(0.6, 1.2)))
 
-	global_light.light_energy = randf()*3
+	global_light.light_energy = randf()*2
 	var background_path = backgrounds_directory_list[randi()%len(backgrounds_directory_list)]
 	var background = load("res://backgrounds/%s" % background_path)
 	world_floor.material_override = SpatialMaterial.new()
