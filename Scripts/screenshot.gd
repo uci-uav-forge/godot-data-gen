@@ -2,6 +2,7 @@ extends Camera
 
 onready var scene_ready = true
 onready var index = 0
+onready var num_imgs = 10_000
 onready var root = get_tree().get_root().get_node("Root")
 onready var just_people_nodes = []
 onready var shapes_list = preload("res://Shapes.tscn").instance().get_children()
@@ -11,7 +12,9 @@ onready var global_light: Light = root.get_node("Light")
 onready var world_floor = root.get_node("Floor")
 onready var opensans_bold_font = preload("res://fonts/OpenSans/OpenSans-Bold.ttf")
 onready var data_folder_name = "godot_data"
-var backgrounds_directory_list
+var backgrounds_list
+var positions
+onready var threads_queue = []
 
 # https://godotengine.org/qa/5175/how-to-get-all-the-files-inside-a-folder
 func list_files_in_directory(path):
@@ -40,7 +43,13 @@ func _ready():
 	res_directory.make_dir("images")
 	res_directory.make_dir("masks")
 	
-	backgrounds_directory_list = list_files_in_directory("res://backgrounds")
+	var backgrounds_directory_list = list_files_in_directory("res://backgrounds")
+	backgrounds_list = []
+	for background_path in backgrounds_directory_list:
+		var background = load("res://backgrounds/%s" % background_path)
+		var bg_mat = SpatialMaterial.new()
+		bg_mat.albedo_texture = background
+		backgrounds_list.append(bg_mat)
 
 	var scene = preload("res://people.tscn")
 	var ppl = scene.instance()
@@ -51,6 +60,12 @@ func _ready():
 		var result = people_regex.search(node.name) 
 		if result:
 			just_people_nodes.append(node)
+	
+	
+	positions = []
+	for x in range(-5, 6, 2):
+		for z in range(-5, 6, 2):
+			positions.append(Vector3(x,0,z))
 
 func prepForSegmentation(node, color: Color):
 	if node is MeshInstance:
@@ -63,10 +78,16 @@ func prepForSegmentation(node, color: Color):
 	for child in node.get_children():
 		prepForSegmentation(child, color)
 
+func save_image(image_tuple):
+	var image = image_tuple[0]
+	var file_name = image_tuple[1]
+	image.save_png("/tmp/%s/%s" % [data_folder_name,file_name])
+
 func takeScreenshot(file_name):
 	var image = get_viewport().get_texture().get_data()
-	print("/tmp/%s/%s" % [data_folder_name,file_name])
-	image.save_png("/tmp/%s/%s" % [data_folder_name,file_name])
+	var thread = Thread.new()
+	thread.start(self, "save_image", [image, file_name])
+	threads_queue.append(thread)
 	
 func makeShapeTarget():
 	var shape = shapes_list[randi()%len(shapes_list)].duplicate()
@@ -106,7 +127,6 @@ func get_target_objects_and_labels():
 	return [target_objects, target_labels]
 
 func gen_train_image():
-	scene_ready = false
 	res_directory.make_dir("masks/%s" % index)
 	var target_objects_and_labels = get_target_objects_and_labels()
 	var target_objects = target_objects_and_labels[0]
@@ -115,22 +135,19 @@ func gen_train_image():
 	var dist_from_center = self.translation.y * tan(-PI/2-self.rotation.x)
 	var picture_center = Vector3(0,0,dist_from_center).rotated(Vector3.UP, self.rotation.y)
 	
-	var positions = []
-	for x in range(-5, 6, 2):
-		for z in range(-5, 6, 2):
-			positions.append(Vector3(x,0,z))
 	positions.shuffle()
 	
+	var pos_idx = 0
 	for obj in target_objects:
 		obj.rotate_y(randf()*TAU)
-		obj.translation+=picture_center + positions.pop_front() + Vector3(randf()-0.5, 0, randf()-0.5)
+		obj.translation+=picture_center + positions[pos_idx]+ Vector3(randf()-0.5, 0, randf()-0.5)
+		pos_idx+=1
 		obj.scale_object_local(rand_range(0.9, 1.1)*Vector3(rand_range(0.6, 1.2),rand_range(0.6, 1.2),rand_range(0.6, 1.2)))
 
-	global_light.light_energy = randf()*2
-	var background_path = backgrounds_directory_list[randi()%len(backgrounds_directory_list)]
-	var background = load("res://backgrounds/%s" % background_path)
-	world_floor.material_override = SpatialMaterial.new()
-	world_floor.material_override.albedo_texture = background
+	global_light.light_energy = randf()*1.5
+	global_light.rotation_degrees = Vector3(rand_range(-30, -150), rand_range(0,360), 0)
+	
+	world_floor.material_override = backgrounds_list[randi()%len(backgrounds_list)]
 	world_floor.scale = Vector3(rand_range(50, 100), 0.001, rand_range(50, 100))
 	
 	yield(VisualServer, "frame_post_draw")
@@ -148,12 +165,19 @@ func gen_train_image():
 	
 	world_floor.material_override = null
 	index += 1
-	yield(VisualServer, "frame_post_draw")
 	scene_ready = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
+	while 1:
+		if threads_queue.empty() or threads_queue[0].is_alive():
+			break
+		threads_queue[0].wait_to_finish()
+		threads_queue.pop_front()
 	if scene_ready:
-		gen_train_image()
-		if index>= 10_000:
+		scene_ready = false
+		if index%50==0:
+			print("%s/%s" % [index, num_imgs])
+		if index >= num_imgs:
 			get_tree().quit()
+		gen_train_image()

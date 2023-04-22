@@ -11,8 +11,8 @@ albedo_texture = ExtResource( 6 )
 [node name="Root" type="Spatial"]
 
 [node name="Light" type="DirectionalLight" parent="."]
-transform = Transform( 0.554757, -3.63684e-08, 0.832012, -0.832012, -2.42492e-08, 0.554757, 0, -1, -4.37114e-08, 0, 27.5242, 0 )
-light_energy = 1.218
+transform = Transform( 0.967661, -0.252255, -1.10264e-08, 0, -4.37114e-08, 1, -0.252255, -0.967661, -4.22978e-08, 0, 27.5242, 0 )
+light_energy = 1.044
 
 [node name="Floor" type="MeshInstance" parent="."]
 transform = Transform( 100, 0, 0, 0, 0.001, 0, 0, 0, 100, 0, 0, 0 )
