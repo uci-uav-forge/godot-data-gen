@@ -1,3 +1,4 @@
 *.import
 images
 masks
+.godot
