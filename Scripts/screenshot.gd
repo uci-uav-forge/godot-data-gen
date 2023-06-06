@@ -38,9 +38,9 @@ func _ready():
 	set_physics_process(false)
 	randomize()
 	
-	res_directory = DirAccess.open("/tmp")
+	res_directory = DirAccess.open("user://")
 	res_directory.make_dir(data_folder_name)
-	res_directory.open("/tmp/%s" % data_folder_name)
+	res_directory = DirAccess.open("user://%s" % data_folder_name)
 	res_directory.make_dir("images")
 	res_directory.make_dir("masks")
 	
@@ -86,8 +86,9 @@ func prepForSegmentation(node, color: Color):
 		prepForSegmentation(child, color)
 
 func save_image(file_name):
-	var image = get_viewport().get_texture().get_data()
-	image.save_png("/tmp/%s/%s" % [data_folder_name,file_name])
+	var image = get_viewport().get_texture().get_image()
+	var save_location_name = "user://%s/%s" % [data_folder_name,file_name]
+	image.save_png(save_location_name)
 
 func takeScreenshot(file_name):
 	var thread = Thread.new()
@@ -103,7 +104,7 @@ func makeShapeTarget():
 	label.rotate_x(-PI/2)
 	shape.add_child(label)
 	label.translate(0.1*Vector3.BACK)
-	return [shape, shape.name]
+	return [shape, shape.name, label.text]
 
 func get_target_objects_and_labels():
 	var target_objects = []
@@ -120,11 +121,12 @@ func get_target_objects_and_labels():
 		var shape_and_name = makeShapeTarget()
 		var shape = shape_and_name[0]
 		var shape_name = shape_and_name[1]
+		var alphanumeric = shape_and_name[2]
 		root.add_child(shape)
 		shape.position = 0.1*Vector3.UP
 		shape.scale=Vector3.ONE*0.8
 		target_objects.append(shape)
-		target_labels.append(shape_name)
+		target_labels.append("%s,%s" % [shape_name, alphanumeric])
 	return [target_objects, target_labels]
 
 func gen_train_image():
@@ -154,7 +156,7 @@ func gen_train_image():
 	await get_tree().process_frame
 	# yield(VisualServer, "frame_post_draw")
 	takeScreenshot("images/image%s.png" % index)
-	await get_tree().create_timer(1).timeout
+	# await get_tree().create_timer(1).timeout
 	prepForSegmentation(world_floor, Color.BLACK)
 	for obj in target_objects:
 		obj.hide()
@@ -165,7 +167,7 @@ func gen_train_image():
 		await get_tree().process_frame
 		#yield(VisualServer, "frame_post_draw")
 		takeScreenshot("masks/%s/%s_%s.png" % [index, target_labels[i], i])
-		await get_tree().create_timer(1).timeout
+		# await get_tree().create_timer(1).timeout
 		target_objects[i].free()
 	
 	world_floor.material_override = null
