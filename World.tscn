@@ -1,22 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://b6yngxspo4xb"]
+[gd_scene load_steps=3 format=3 uid="uid://b6yngxspo4xb"]
 
 [ext_resource type="Script" path="res://Scripts/screenshot.gd" id="2"]
 
 [sub_resource type="BoxMesh" id="1"]
-
-[sub_resource type="FontFile" id="FontFile_feyu0"]
-face_index = null
-embolden = null
-transform = null
-cache/0/16/0/ascent = 0.0
-cache/0/16/0/descent = 0.0
-cache/0/16/0/underline_position = 0.0
-cache/0/16/0/underline_thickness = 0.0
-cache/0/16/0/scale = 1.0
-cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
-
-[sub_resource type="FontVariation" id="FontVariation_o6hhc"]
-base_font = SubResource("FontFile_feyu0")
 
 [node name="Root" type="Node3D"]
 
@@ -38,6 +24,3 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 75,
 current = true
 fov = 10.0
 script = ExtResource("2")
-
-[node name="Label3D" type="Label3D" parent="Viewport/Camera"]
-font = SubResource("FontVariation_o6hhc")

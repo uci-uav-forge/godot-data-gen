@@ -2,7 +2,7 @@ extends Camera3D
 
 @onready var scene_ready = true
 @onready var index = 0
-@onready var num_imgs = 10_000
+@onready var num_imgs = 1_000
 @onready var root = get_tree().get_root().get_node("Root")
 @onready var just_people_nodes = []
 @onready var shapes_list = preload("res://Shapes.tscn").instantiate().get_children()
@@ -85,26 +85,28 @@ func prepForSegmentation(node, color: Color):
 	for child in node.get_children():
 		prepForSegmentation(child, color)
 
-func save_image(file_name):
-	var image = get_viewport().get_texture().get_image()
+func save_image(image, file_name):
 	var save_location_name = "user://%s/%s" % [data_folder_name,file_name]
 	image.save_png(save_location_name)
 
 func takeScreenshot(file_name):
 	var thread = Thread.new()
-	thread.start(save_image.bind(file_name))
+	var image = get_viewport().get_texture().get_image()
+	thread.start(save_image.bind(image, file_name))
 	threads_queue.append(thread)
 	
 func makeShapeTarget():
 	var shape = shapes_list[randi()%len(shapes_list)].duplicate()
 	shape.material_override = StandardMaterial3D.new()
-	shape.material_override.albedo_color = Color(randf(), randf(), randf())
+	var shape_color = [randi_range(0,255), randi_range(0,255), randi_range(0,255)]
+	shape.material_override.albedo_color = Color(shape_color[0]/255.0, shape_color[1]/255.0, shape_color[2]/255.0)
 	var label = labels_list[randi()%len(labels_list)].duplicate()
-	label.modulate = Color(randf(), randf(), randf())
+	var letter_color = [randi_range(0,255), randi_range(0,255), randi_range(0,255)]
+	label.modulate = Color(letter_color[0]/255.0, letter_color[1]/255.0, letter_color[2]/255.0)
 	label.rotate_x(-PI/2)
 	shape.add_child(label)
 	label.translate(0.1*Vector3.BACK)
-	return [shape, shape.name, label.text]
+	return [shape, shape.name, label.text, shape_color, letter_color]
 
 func get_target_objects_and_labels():
 	var target_objects = []
@@ -122,11 +124,16 @@ func get_target_objects_and_labels():
 		var shape = shape_and_name[0]
 		var shape_name = shape_and_name[1]
 		var alphanumeric = shape_and_name[2]
+		var shape_color = shape_and_name[3]
+		var letter_color = shape_and_name[4]
+		var shape_color_string = "%s:%s:%s" % shape_color
+		var letter_color_string = "%s:%s:%s" % letter_color
 		root.add_child(shape)
 		shape.position = 0.1*Vector3.UP
 		shape.scale=Vector3.ONE*0.8
 		target_objects.append(shape)
-		target_labels.append("%s,%s" % [shape_name, alphanumeric])
+		var label_string = "%s,%s,%s,%s" % [shape_name, alphanumeric, shape_color_string, letter_color_string]
+		target_labels.append(label_string)
 	return [target_objects, target_labels]
 
 func gen_train_image():
@@ -134,7 +141,8 @@ func gen_train_image():
 	var target_objects_and_labels = get_target_objects_and_labels()
 	var target_objects = target_objects_and_labels[0]
 	var target_labels = target_objects_and_labels[1]
-	self.rotation_degrees = Vector3(randi_range(-60, -120), randi_range(0,360), 0)
+	var rotation_range = 20
+	self.rotation_degrees = Vector3(randi_range(-90-rotation_range, -90+rotation_range), randi_range(0,360), 0)
 	var dist_from_center = self.position.y * tan(-PI/2-self.rotation.x)
 	var picture_center = Vector3(0,0,dist_from_center).rotated(Vector3.UP, self.rotation.y)
 	
@@ -177,7 +185,7 @@ func gen_train_image():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	while 1:
-		if len(threads_queue)==0 or threads_queue[0].is_alive():
+		if len(threads_queue)==0 or threads_queue[0].is_alive() and len(threads_queue)<10:
 			break
 		threads_queue[0].wait_to_finish()
 		threads_queue.pop_front()
