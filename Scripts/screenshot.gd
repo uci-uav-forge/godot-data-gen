@@ -2,7 +2,7 @@ extends Camera3D
 
 @onready var scene_ready = true
 @onready var index = 0
-@onready var num_imgs = 10_000
+@onready var num_imgs = 100
 @onready var root = get_tree().get_root().get_node("Root")
 @onready var just_people_nodes = []
 @onready var shapes_list = preload("res://Shapes.tscn").instantiate().get_children()
