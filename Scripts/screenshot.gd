@@ -126,7 +126,7 @@ func get_target_objects_and_labels():
 		shape.position = 0.1*Vector3.UP
 		shape.scale=Vector3.ONE*0.8
 		target_objects.append(shape)
-		target_labels.append("%s,%s" % [shape_name, alphanumeric])
+		target_labels.append(shape_name)
 	return [target_objects, target_labels]
 
 func gen_train_image():
