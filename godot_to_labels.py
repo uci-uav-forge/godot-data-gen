@@ -52,6 +52,7 @@ def gen_img(num, num_images, input_dir, output_dir, shapes_to_categories):
     cv2.imwrite(f"{output_dir}/images/{split_name}/image{num}.png", img)
 
 def main():
+    user = os.environ
     datagen_dir = os.path.dirname(os.path.abspath(__file__))
     categories_to_shapes = json.load(open(f"{datagen_dir}/shape_name_labels.json","r"))
     shapes_to_categories = {shape:category for category, shape in categories_to_shapes.items()}
