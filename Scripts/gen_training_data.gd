@@ -2,7 +2,7 @@ extends Camera3D
 
 @onready var scene_ready = true
 @onready var index = 0
-@onready var num_imgs = 1_000
+@onready var num_imgs = 100
 @onready var root = get_tree().get_root().get_node("Root")
 @onready var just_people_nodes = []
 @onready var shapes_list = preload("res://Shapes.tscn").instantiate().get_children()
@@ -141,7 +141,7 @@ func gen_train_image():
 	var target_objects_and_labels = get_target_objects_and_labels()
 	var target_objects = target_objects_and_labels[0]
 	var target_labels = target_objects_and_labels[1]
-	var rotation_range = 20
+	var rotation_range = 10
 	self.rotation_degrees = Vector3(randi_range(-90-rotation_range, -90+rotation_range), randi_range(0,360), 0)
 	var dist_from_center = self.position.y * tan(-PI/2-self.rotation.x)
 	var picture_center = Vector3(0,0,dist_from_center).rotated(Vector3.UP, self.rotation.y)
@@ -191,7 +191,7 @@ func _process(_delta):
 		threads_queue.pop_front()
 	if scene_ready:
 		scene_ready = false
-		if index%50==0:
+		if index%10==0:
 			print("%s/%s" % [index, num_imgs])
 		if index >= num_imgs:
 			get_tree().quit()

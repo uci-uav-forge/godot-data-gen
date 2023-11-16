@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://b6yngxspo4xb"]
+[gd_scene load_steps=6 format=3 uid="uid://ct4nj2i38log5"]
 
-[ext_resource type="Texture2D" uid="uid://ch6lxfjpf620d" path="res://backgrounds/airport_1.png" id="1_55rm6"]
-[ext_resource type="Script" path="res://Scripts/screenshot.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://qqr4upq7mv08" path="res://backgrounds/airport_1.png" id="1_55rm6"]
+[ext_resource type="Script" path="res://Scripts/gen_training_data.gd" id="2_plc6t"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_ugkvt"]
 
@@ -64,12 +64,6 @@ shader_parameter/texture_albedo = ExtResource("1_55rm6")
 
 [node name="Root" type="Node3D"]
 
-[node name="Floor2" type="MeshInstance3D" parent="."]
-transform = Transform3D(146.052, 0, 0, 0, 117.509, 0, 0, 0, 70, 0.3918, -16.6746, -0.18811)
-mesh = SubResource("PlaneMesh_ugkvt")
-skeleton = NodePath("../Floor")
-surface_material_override/0 = SubResource("ShaderMaterial_u0240")
-
 [node name="Light" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.967661, -0.252255, -1.10264e-08, 0, -4.37114e-08, 1, -0.252255, -0.967661, -4.22978e-08, 0, 27.5242, 0)
 light_energy = 0.236
@@ -85,7 +79,7 @@ render_target_clear_mode = 2
 render_target_update_mode = 3
 
 [node name="Camera" type="Camera3D" parent="Viewport"]
-transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, -80, 75, 0)
+transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, 0, 75, 0)
 current = true
 fov = 67.6
-script = ExtResource("2")
+script = ExtResource("2_plc6t")
