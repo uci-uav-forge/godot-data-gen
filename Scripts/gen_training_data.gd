@@ -39,6 +39,7 @@ func _ready():
 	randomize()
 	
 	res_directory = DirAccess.open("user://")
+	res_directory.remove("user://%s" % data_folder_name)
 	res_directory.make_dir(data_folder_name)
 	res_directory = DirAccess.open("user://%s" % data_folder_name)
 	res_directory.make_dir("images")

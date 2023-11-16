@@ -1,9 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://ct4nj2i38log5"]
+[gd_scene load_steps=9 format=3 uid="uid://ct4nj2i38log5"]
 
 [ext_resource type="Texture2D" uid="uid://qqr4upq7mv08" path="res://backgrounds/airport_1.png" id="1_55rm6"]
 [ext_resource type="Script" path="res://Scripts/gen_training_data.gd" id="2_plc6t"]
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_1ifvu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_at7oi"]
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_syrqj"]
+disable_ambient_light = true
+albedo_color = Color(0, 0, 0, 1)
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_ugkvt"]
+material = SubResource("StandardMaterial3D_syrqj")
 
 [sub_resource type="Shader" id="Shader_rodag"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.0.3.stable's StandardMaterial3D.
@@ -64,6 +75,12 @@ shader_parameter/texture_albedo = ExtResource("1_55rm6")
 
 [node name="Root" type="Node3D"]
 
+[node name="black_bg" type="MeshInstance3D" parent="."]
+transform = Transform3D(1000, 0, 0, 0, 1000, 0, 0, 0, 1000, 0, -1, 0)
+mesh = SubResource("PlaneMesh_1ifvu")
+skeleton = NodePath("../Floor")
+surface_material_override/0 = SubResource("StandardMaterial3D_at7oi")
+
 [node name="Light" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.967661, -0.252255, -1.10264e-08, 0, -4.37114e-08, 1, -0.252255, -0.967661, -4.22978e-08, 0, 27.5242, 0)
 light_energy = 0.236
@@ -74,12 +91,12 @@ mesh = SubResource("PlaneMesh_ugkvt")
 surface_material_override/0 = SubResource("ShaderMaterial_u0240")
 
 [node name="Viewport" type="SubViewport" parent="."]
-size = Vector2i(5312, 2988)
+size = Vector2i(640, 640)
 render_target_clear_mode = 2
 render_target_update_mode = 3
 
 [node name="Camera" type="Camera3D" parent="Viewport"]
 transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, 0, 75, 0)
 current = true
-fov = 67.6
+fov = 6.7
 script = ExtResource("2_plc6t")
