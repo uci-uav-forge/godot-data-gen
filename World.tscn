@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://ct4nj2i38log5"]
 
-[ext_resource type="Texture2D" uid="uid://qqr4upq7mv08" path="res://backgrounds/airport_1.png" id="1_55rm6"]
+[ext_resource type="Texture2D" uid="uid://fklcp4pfipgr" path="res://backgrounds/airport_1.png" id="1_55rm6"]
 [ext_resource type="Script" path="res://Scripts/gen_training_data.gd" id="2_plc6t"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_1ifvu"]
@@ -64,7 +64,7 @@ shader = SubResource("Shader_rodag")
 shader_parameter/albedo = Color(1, 1, 1, 1)
 shader_parameter/point_size = 0.0
 shader_parameter/roughness = 1.0
-shader_parameter/metallic_texture_channel = Plane(1, 0, 0, 0)
+shader_parameter/metallic_texture_channel = null
 shader_parameter/specular = 0.5
 shader_parameter/metallic = 0.0
 shader_parameter/uv1_scale = Vector3(1, 1, 1)

@@ -6,7 +6,7 @@ extends Camera3D
 @onready var root = get_tree().get_root().get_node("Root")
 @onready var just_people_nodes = []
 @onready var shapes_list = preload("res://Shapes.tscn").instantiate().get_children()
-@onready var symbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+@onready var symbols = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 var res_directory
 @onready var global_light: Light3D = root.get_node("Light")
 @onready var world_floor = root.get_node("Floor")
@@ -127,8 +127,9 @@ func get_target_objects_and_labels():
 		var alphanumeric = shape_and_name[2]
 		var shape_color = shape_and_name[3]
 		var letter_color = shape_and_name[4]
-		var shape_color_string = "%s:%s:%s" % shape_color
-		var letter_color_string = "%s:%s:%s" % letter_color
+		# changed : to - because windows doesn't allow : in filepaths
+		var shape_color_string = "%s-%s-%s" % shape_color
+		var letter_color_string = "%s-%s-%s" % letter_color
 		root.add_child(shape)
 		shape.position = 0.1*Vector3.UP
 		shape.scale=Vector3.ONE*0.8

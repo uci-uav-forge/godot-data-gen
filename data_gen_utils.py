@@ -1,6 +1,8 @@
 import cv2
 import numpy as np
 import os
+from dataclasses import dataclass
+
 
 def get_polygon(shape_img: cv2.Mat) -> np.ndarray:
     '''
@@ -19,3 +21,34 @@ def get_polygon(shape_img: cv2.Mat) -> np.ndarray:
         contours = cv2.convexHull(contours)
         return contours.reshape(-1,2)
     return np.array(contours[0]).reshape(-1,2)
+
+@dataclass
+class LetterBoxInfo:
+    x: int
+    y: int
+    width: int
+    height: int
+    letter_label: int
+
+def get_letter_box(polygon_points: np.ndarray, img_shape: [], letter_label: str) -> LetterBoxInfo:
+    # polygon_points = [[x, y], [x, y], [x,y], ...]
+    # returns the bounding box for the shape containing the letter
+    x_min, x_max, y_min, y_max = None, None, None, None
+    for point in polygon_points:
+        x = point[0]
+        y = point[1]
+        if x_min == None or x < x_min:
+            x_min = x
+        if x_max == None or x > x_max:
+            x_max = x
+        if y_min == None or y < y_min:
+            y_min = y
+        if y_max == None or y > y_max:
+            y_max = y
+    x = x_min * img_shape[0]
+    y = y_min * img_shape[1]
+    width = (x_max - x_min) * img_shape[0]
+    height = (y_max - y_min) * img_shape[1]
+    letter_box = LetterBoxInfo(int(x), int(y), int(width), int(height), letter_label)
+    return letter_box
+                
