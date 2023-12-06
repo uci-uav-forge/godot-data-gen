@@ -127,8 +127,8 @@ func get_target_objects_and_labels():
 		var alphanumeric = shape_and_name[2]
 		var shape_color = shape_and_name[3]
 		var letter_color = shape_and_name[4]
-		var shape_color_string = "%s:%s:%s" % shape_color
-		var letter_color_string = "%s:%s:%s" % letter_color
+		var shape_color_string = "%s_%s_%s" % shape_color
+		var letter_color_string = "%s_%s_%s" % letter_color
 		root.add_child(shape)
 		shape.position = 0.1*Vector3.UP
 		shape.scale=Vector3.ONE*0.8
@@ -175,8 +175,7 @@ func gen_train_image():
 		prepForSegmentation(target_objects[i], Color.WHITE)
 		await get_tree().process_frame
 		#yield(VisualServer, "frame_post_draw")
-		var file_name =  str(target_labels[i]).replace(":", "_")
-		takeScreenshot("masks/%s/%s_%s.png" % [index, file_name , i])
+		takeScreenshot("masks/%s/%s_%s.png" % [index, target_labels[i] , i])
 		# await get_tree().create_timer(1).timeout
 		target_objects[i].free()
 	
