@@ -1,1 +1,1 @@
-cd ~/.local/share/godot/app_userdata/forge-godot/
+pushd ~/.local/share/godot/app_userdata/forge-godot/

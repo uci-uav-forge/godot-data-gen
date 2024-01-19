@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://ct4nj2i38log5"]
 
-[ext_resource type="Texture2D" uid="uid://fklcp4pfipgr" path="res://backgrounds/airport_1.png" id="1_55rm6"]
-[ext_resource type="Script" path="res://Scripts/gen_training_data.gd" id="2_plc6t"]
+[ext_resource type="Texture2D" uid="uid://qqr4upq7mv08" path="res://backgrounds/airport_1.png" id="1_55rm6"]
+[ext_resource type="Script" path="res://Scripts/gen_3d_testing_data.gd" id="2_dlsij"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_1ifvu"]
 
@@ -91,12 +91,12 @@ mesh = SubResource("PlaneMesh_ugkvt")
 surface_material_override/0 = SubResource("ShaderMaterial_u0240")
 
 [node name="Viewport" type="SubViewport" parent="."]
-size = Vector2i(640, 640)
+size = Vector2i(1920, 1080)
 render_target_clear_mode = 2
 render_target_update_mode = 3
 
 [node name="Camera" type="Camera3D" parent="Viewport"]
 transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, 0, 75, 0)
 current = true
-fov = 6.7
-script = ExtResource("2_plc6t")
+fov = 20.0
+script = ExtResource("2_dlsij")

@@ -16,6 +16,7 @@ var backgrounds_list
 var positions
 @onready var threads_queue = []
 @onready var labels_list = []
+@onready var camera_positions = []
 
 func prepare_people_nodes():
 	var scene = preload("res://people.tscn")
@@ -31,6 +32,17 @@ func prepare_people_nodes():
 func _ready():
 	set_physics_process(false)
 	randomize()
+	
+	var position_std = 5
+	
+	# the targets are all within x [-140, 140] and z [-65, 65]
+	var camera_view_area_size = 30
+	for cam_x in range(-140+camera_view_area_size/2,140-camera_view_area_size/2,camera_view_area_size):
+		for cam_z in range(-65+camera_view_area_size/2, 65-camera_view_area_size/2, camera_view_area_size):
+			var rand_pos_drift = Vector3(randfn(0,position_std),randfn(0,position_std),randfn(0,position_std))
+			camera_positions.append(Vector3(cam_x,75,cam_z) + rand_pos_drift)
+	
+
 	
 	res_directory = DirAccess.open("user://")
 	res_directory.make_dir(data_folder_name)
@@ -120,8 +132,8 @@ func gen_target():
 	var alphanumeric = shape_and_name[2]
 	var shape_color = shape_and_name[3]
 	var letter_color = shape_and_name[4]
-	var shape_color_string = "%s:%s:%s" % shape_color
-	var letter_color_string = "%s:%s:%s" % letter_color
+	var shape_color_string = "%s-%s-%s" % shape_color
+	var letter_color_string = "%s-%s-%s" % letter_color
 	var n = root.get_child_count()
 	root.add_child.call_deferred(shape)
 	shape.position = 0.1*Vector3.UP
@@ -143,13 +155,13 @@ func get_target_objects_and_labels():
 	return [target_objects, target_labels]
 
 func gen_train_image():
-	print(index)
 	var rotation_range = 10
 	self.rotation_degrees = Vector3(randi_range(-90-rotation_range, -90+rotation_range), -90, 0)
 
-	var rand_pos_drift = Vector3(randi_range(-5, 5), randi_range(-5, 5), randi_range(-5,5))
-	var start_pos = Vector3(-100, 80, 0)
-	self.position = start_pos + Vector3(200/(num_imgs-1)*index,0,0) + rand_pos_drift
+	if index >= len(camera_positions):
+		get_tree().quit()
+		return
+	self.position = camera_positions[index]
 
 	var position_string  = "%d,%d,%d" % [self.position.x, self.position.y, self.position.z]
 	var rotation_string  = "%d,%d,%d" % [self.rotation_degrees.x, self.rotation_degrees.y, self.rotation_degrees.z]
@@ -163,6 +175,4 @@ func gen_train_image():
 func _process(_delta):
 	if scene_ready:
 		scene_ready = false
-		if index >= num_imgs:
-			get_tree().quit()
 		gen_train_image()
