@@ -1,10 +1,11 @@
 # takes dataset with masks generated with godot and turns it into a dataset with labels for YOLOv8
-from data_gen_utils import get_polygon
+from data_gen_utils import get_polygon, get_letter_box, LetterBoxInfo
 import os
 import cv2
 import json
 import numpy as np
 from tqdm import tqdm
+
 
 def preprocess_img(img):
     # blur image with random kernel size
@@ -20,7 +21,8 @@ def preprocess_img(img):
     np.clip(img, 0, 255, out=img)
     return img
 
-def gen_img(num, num_images, input_dir, output_dir, shapes_to_categories):
+def gen_img(num, num_images, input_dir, output_dir, letter_to_categories):
+    index = 0
     if int(num)<0.85*num_images:
         split_name = "train"
     elif int(num)<0.95*num_images:
@@ -32,10 +34,14 @@ def gen_img(num, num_images, input_dir, output_dir, shapes_to_categories):
         tqdm.write(f"image read error for {input_dir}/images/image{num}.png")
         return
     img = preprocess_img(img)
-    file_contents = ""
     for mask_file_name in os.listdir(f"{input_dir}/masks/{num}"):
         mask_path = f"{input_dir}/masks/{num}/{mask_file_name}"
-        shape_name = mask_file_name.split("_")[0].split(",")[0] 
+        # mask_file_name example: semicircle,X,160-83-170,154-22-90_1.png
+        info = mask_file_name.split("_")[0].split(",")
+        # ignore images without shapes (lke person_0.png)
+        if len(info) == 1:
+            continue
+        letter = info[1]
         mask = cv2.imread(mask_path)
         polygon = get_polygon(mask)
 
@@ -44,30 +50,38 @@ def gen_img(num, num_images, input_dir, output_dir, shapes_to_categories):
                 tqdm.write(f"no polygon found for {mask_path}")
             return 
         normalized_polygon = polygon / np.array([mask.shape[1], mask.shape[0]])
-        file_contents+=f"{shapes_to_categories[shape_name]} {' '.join(map(str, normalized_polygon.flatten()))}\n"
-    with open(f"{output_dir}/labels/{split_name}/image{num}.txt", "w") as f:
-        f.write(file_contents)
-    cv2.imwrite(f"{output_dir}/images/{split_name}/image{num}.png", img)
+        letter_box: LetterBoxInfo = get_letter_box(normalized_polygon, img.shape, letter_to_categories[letter])
+        # crop image
+        x, y = letter_box.x, letter_box.y
+        w, h = letter_box.width, letter_box.height
+        # ignore partial shapes/letters
+        if w < 80 or h < 80:
+            continue
+        cropped_img = img[y:y+h, x:x+w]
+        result_img  = cv2.resize(cropped_img, (128,128))
+        # write image to the letter label's folder
+        cv2.imwrite(f"{output_dir}/{split_name}/{letter_box.letter_label}/image{num}_{index}.png", result_img)
+        index += 1
+
 
 def main():
     user = os.environ["USER"]
     datagen_dir = os.path.dirname(os.path.abspath(__file__))
-    categories_to_shapes = json.load(open(f"{datagen_dir}/shape_name_labels.json","r"))
-    shapes_to_categories = {shape:category for category, shape in categories_to_shapes.items()}
+    categories_to_letter = json.load(open(f"{datagen_dir}/letter_labels.json","r"))
+    letter_to_categories = {letter:category for category, letter in categories_to_letter.items()}
     # for linux
-    input_dir = f"/home/{user}/.local/share/godot/app_userdata/forge-godot/godot_data"
-    # for windows (change username)
-    # input_dir = "/mnt/c/Users/sch90/AppData/Roaming/Godot/app_userdata/forge-godot/godot_data"
-    output_dir = f"{datagen_dir}/data"
+    # input_dir = f"/home/{user}/.local/share/godot/app_userdata/forge-godot/godot_data"
+    # for windows (change user name)
+    input_dir = "/mnt/c/Users/sch90/AppData/Roaming/Godot/app_userdata/forge-godot/godot_data"
+    output_dir = f"{datagen_dir}/letter_data"
     os.makedirs(output_dir, exist_ok=True)
     for split_name in ["train", "validation", "test"]:
-        os.makedirs(f"{output_dir}/labels/{split_name}", exist_ok=True)
-        os.makedirs(f"{output_dir}/images/{split_name}", exist_ok=True)
+        os.makedirs(f"{output_dir}/{split_name}", exist_ok=True)
+        for i in range(0, 36):
+            os.makedirs(f"{output_dir}/{split_name}/{i}", exist_ok=True)
     num_images = len(os.listdir(f"{input_dir}/images"))
 
     for i in tqdm(range(num_images)):
-        gen_img(i, num_images, input_dir, output_dir, shapes_to_categories)
+        gen_img(i, num_images, input_dir, output_dir, letter_to_categories)
 if __name__ == "__main__":
     main()
-
-    
