@@ -2,7 +2,6 @@ extends Camera3D
 
 @onready var scene_ready = true
 @onready var index = 0
-@onready var num_imgs = 10
 @onready var root = get_tree().get_root().get_node("Root")
 @onready var just_people_nodes = []
 @onready var shapes_list = preload("res://Shapes.tscn").instantiate().get_children()
@@ -11,7 +10,7 @@ var res_directory
 @onready var global_light: Light3D = root.get_node("Light")
 @onready var world_floor = root.get_node("Floor")
 @onready var opensans_bold_font = preload("res://fonts/OpenSans/OpenSans-Bold.ttf")
-@onready var data_folder_name = "godot_data"
+@onready var data_folder_name = "sim_dataset"
 var backgrounds_list
 var positions
 @onready var threads_queue = []
@@ -36,10 +35,13 @@ func _ready():
 	var position_std = 5
 	
 	# the targets are all within x [-140, 140] and z [-65, 65]
-	var camera_view_area_size = 30
-	for cam_x in range(-140+camera_view_area_size/2,140-camera_view_area_size/2,camera_view_area_size):
-		for cam_z in range(-65+camera_view_area_size/2, 65-camera_view_area_size/2, camera_view_area_size):
-			var rand_pos_drift = Vector3(randfn(0,position_std),randfn(0,position_std),randfn(0,position_std))
+	var camera_fov = 30
+	self.fov = camera_fov
+	var camera_view_x = 2*75*tan(deg_to_rad(self.fov/2))
+	var camera_view_y = camera_view_x*9/16
+	for cam_x in range(-140,140,camera_view_y):
+		for cam_z in range(-65, 65, camera_view_x):
+			var rand_pos_drift = Vector3.ZERO #Vector3(randfn(0,position_std),randfn(0,position_std),randfn(0,position_std))
 			camera_positions.append(Vector3(cam_x,75,cam_z) + rand_pos_drift)
 	
 
@@ -64,7 +66,7 @@ func _ready():
 	
 	positions.shuffle()
 	
-	var target_positions_save_file = FileAccess.open("user://godot_data/labels.txt", FileAccess.WRITE)
+	var target_positions_save_file = FileAccess.open("user://%s/labels.txt" % data_folder_name, FileAccess.WRITE)
 	
 	var has_emergent = false # TODO: uncomment this when ready to put people in datset #randi()%2==0
 	var num_targets = 5
@@ -156,7 +158,8 @@ func get_target_objects_and_labels():
 
 func gen_train_image():
 	var rotation_range = 10
-	self.rotation_degrees = Vector3(randi_range(-90-rotation_range, -90+rotation_range), -90, 0)
+	var rotation_variance = Vector3.ZERO
+	self.rotation_degrees = Vector3(-90, -90, 0) + rotation_variance
 
 	if index >= len(camera_positions):
 		get_tree().quit()
