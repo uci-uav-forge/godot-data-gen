@@ -176,7 +176,7 @@ func gen_train_image():
 		prepForSegmentation(target_objects[i], Color.WHITE)
 		await get_tree().process_frame
 		#yield(VisualServer, "frame_post_draw")
-		takeScreenshot("masks/%s/%s_%s.png" % [index, target_labels[i], i])
+		takeScreenshot("masks/%s/%s_%s.png" % [index, target_labels[i] , i])
 		# await get_tree().create_timer(1).timeout
 		target_objects[i].free()
 	
