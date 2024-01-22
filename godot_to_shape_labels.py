@@ -45,6 +45,7 @@ def gen_img(num, num_images, input_dir, output_dir, shapes_to_categories):
             return 
         normalized_polygon = polygon / np.array([mask.shape[1], mask.shape[0]])
         file_contents+=f"{shapes_to_categories[shape_name]} {' '.join(map(str, normalized_polygon.flatten()))}\n"
+
     with open(f"{output_dir}/labels/{split_name}/image{num}.txt", "w") as f:
         f.write(file_contents)
     cv2.imwrite(f"{output_dir}/images/{split_name}/image{num}.png", img)
@@ -54,7 +55,9 @@ def main():
     datagen_dir = os.path.dirname(os.path.abspath(__file__))
     categories_to_shapes = json.load(open(f"{datagen_dir}/shape_name_labels.json","r"))
     shapes_to_categories = {shape:category for category, shape in categories_to_shapes.items()}
-    input_dir = f"/home/{user}/.local/share/godot/app_userdata/forge-godot/godot_data"
+    input_dir = "/mnt/c/Users/kirva/AppData/Roaming/Godot/app_userdata/forge-godot/godot_data"
+    #"/mnt/c/Users/kirva/AppData/Roaming/Godot/app_userdata/forge-godot/godot_data"
+    #f"/home/{user}/.local/share/godot/app_userdata/forge-godot/godot_data"
     output_dir = f"{datagen_dir}/data"
     os.makedirs(output_dir, exist_ok=True)
     for split_name in ["train", "validation", "test"]:

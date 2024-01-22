@@ -1,13 +1,13 @@
 [gd_scene load_steps=9 format=3 uid="uid://bq3ryiysftvf2"]
 
-[ext_resource type="ArrayMesh" uid="uid://dx6mhr7g1t6oj" path="res://3d/circle.obj" id="1"]
-[ext_resource type="ArrayMesh" uid="uid://be8gu7vmx1ff1" path="res://3d/square.obj" id="4"]
-[ext_resource type="ArrayMesh" uid="uid://c7v444iep5w66" path="res://3d/pentagon.obj" id="5"]
-[ext_resource type="ArrayMesh" uid="uid://447ka8ouiaf8" path="res://3d/triangle.obj" id="6"]
-[ext_resource type="ArrayMesh" uid="uid://dfun7vfobn8d7" path="res://3d/cross.obj" id="7"]
-[ext_resource type="ArrayMesh" uid="uid://dk2nvwg7xfmfe" path="res://3d/semicircle.obj" id="8"]
-[ext_resource type="ArrayMesh" uid="uid://dip1jbxj66lty" path="res://3d/quartercircle.obj" id="9"]
-[ext_resource type="ArrayMesh" uid="uid://ca4cf8p6tueaf" path="res://3d/star.obj" id="10"]
+[ext_resource type="ArrayMesh" uid="uid://c2ijqprmjsbws" path="res://3d/circle.obj" id="1"]
+[ext_resource type="ArrayMesh" uid="uid://b4o03201mne2b" path="res://3d/square.obj" id="4"]
+[ext_resource type="ArrayMesh" uid="uid://d18f74ncp8md8" path="res://3d/pentagon.obj" id="5"]
+[ext_resource type="ArrayMesh" uid="uid://54t22tsueace" path="res://3d/triangle.obj" id="6"]
+[ext_resource type="ArrayMesh" uid="uid://b48uue3amoj3n" path="res://3d/cross.obj" id="7"]
+[ext_resource type="ArrayMesh" uid="uid://cwdxn27ax72kl" path="res://3d/semicircle.obj" id="8"]
+[ext_resource type="ArrayMesh" uid="uid://bhuaisphfu8w6" path="res://3d/quartercircle.obj" id="9"]
+[ext_resource type="ArrayMesh" uid="uid://cqtk2lsrrgsr5" path="res://3d/star.obj" id="10"]
 
 [node name="Spatial" type="Node3D"]
 

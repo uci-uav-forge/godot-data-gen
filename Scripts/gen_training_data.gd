@@ -2,7 +2,7 @@ extends Camera3D
 
 @onready var scene_ready = true
 @onready var index = 0
-@onready var num_imgs = 100
+@onready var num_imgs = 10000
 @onready var root = get_tree().get_root().get_node("Root")
 @onready var just_people_nodes = []
 @onready var shapes_list = preload("res://Shapes.tscn").instantiate().get_children()
@@ -65,8 +65,8 @@ func _ready():
 	
 	
 	positions = []
-	for x in range(-5, 6, 2):
-		for z in range(-5, 6, 2):
+	for x in range(-3, 3, 3):
+		for z in range(-3, 3, 3):
 			positions.append(Vector3(x,0,z))
 	for symbol in symbols:
 		var label = Label3D.new()
@@ -112,7 +112,7 @@ func makeShapeTarget():
 func get_target_objects_and_labels():
 	var target_objects = []
 	var target_labels = []
-	if randi()%3==0:
+	if randi()%len(shapes_list)==0:
 		var random_person = just_people_nodes[randi()%len(just_people_nodes)].duplicate()
 		root.add_child(random_person)
 		random_person.position = 4*Vector3.UP
@@ -127,8 +127,8 @@ func get_target_objects_and_labels():
 		var alphanumeric = shape_and_name[2]
 		var shape_color = shape_and_name[3]
 		var letter_color = shape_and_name[4]
-		var shape_color_string = "%s:%s:%s" % shape_color
-		var letter_color_string = "%s:%s:%s" % letter_color
+		var shape_color_string = "%s_%s_%s" % shape_color
+		var letter_color_string = "%s_%s_%s" % letter_color
 		root.add_child(shape)
 		shape.position = 0.1*Vector3.UP
 		shape.scale=Vector3.ONE*0.8
@@ -152,7 +152,8 @@ func gen_train_image():
 	var pos_idx = 0
 	for obj in target_objects:
 		obj.rotate_y(randf()*TAU)
-		obj.position+=picture_center + positions[pos_idx]+ Vector3(randf()-0.5, 0, randf()-0.5)
+		obj.position=picture_center
+		obj.position+= positions[pos_idx] + Vector3(randf(), 0, randf()) 
 		pos_idx+=1
 		obj.scale_object_local(randf_range(0.9, 1.1)*Vector3(randf_range(0.6, 1.2),randf_range(0.6, 1.2),randf_range(0.6, 1.2)))
 
@@ -192,7 +193,7 @@ func _process(_delta):
 		threads_queue.pop_front()
 	if scene_ready:
 		scene_ready = false
-		if index%10==0:
+		if index%100==0:
 			print("%s/%s" % [index, num_imgs])
 		if index >= num_imgs:
 			get_tree().quit()
