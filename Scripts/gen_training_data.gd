@@ -2,7 +2,7 @@ extends Camera3D
 
 @onready var scene_ready = true
 @onready var index = 0
-@onready var num_imgs = 100
+@onready var num_imgs = 10000
 @onready var root = get_tree().get_root().get_node("Root")
 @onready var just_people_nodes = []
 @onready var shapes_list = preload("res://Shapes.tscn").instantiate().get_children()
@@ -16,6 +16,8 @@ var backgrounds_list
 var positions
 @onready var threads_queue = []
 @onready var labels_list = []
+var COLORS_TO_RGB = [ Color(1, 0, 0), Color(0, 1, 0), Color(0, 0, 1), Color(1, 0.65, 0), Color(0.78, 0, 0.78), Color(1, 1, 1), Color(0, 0, 0), Color(0.65, 0.16, 0.16) ]
+#Color values are chosen for red, green, blue, orange, purple, white, black, and brown to ensure objectivity
 
 # https://godotengine.org/qa/5175/how-to-get-all-the-files-inside-a-folder
 func list_files_in_directory(path):
@@ -65,8 +67,8 @@ func _ready():
 	
 	
 	positions = []
-	for x in range(-5, 6, 2):
-		for z in range(-5, 6, 2):
+	for x in range(-3, 3, 3):
+		for z in range(-3, 3, 3):
 			positions.append(Vector3(x,0,z))
 	for symbol in symbols:
 		var label = Label3D.new()
@@ -99,11 +101,11 @@ func takeScreenshot(file_name):
 func makeShapeTarget():
 	var shape = shapes_list[randi()%len(shapes_list)].duplicate()
 	shape.material_override = StandardMaterial3D.new()
-	var shape_color = [randi_range(0,255), randi_range(0,255), randi_range(0,255)]
-	shape.material_override.albedo_color = Color(shape_color[0]/255.0, shape_color[1]/255.0, shape_color[2]/255.0)
+	var shape_color = randi()%len(COLORS_TO_RGB)
+	shape.material_override.albedo_color = COLORS_TO_RGB[shape_color]
 	var label = labels_list[randi()%len(labels_list)].duplicate()
-	var letter_color = [randi_range(0,255), randi_range(0,255), randi_range(0,255)]
-	label.modulate = Color(letter_color[0]/255.0, letter_color[1]/255.0, letter_color[2]/255.0)
+	var letter_color = randi()%len(COLORS_TO_RGB)
+	label.modulate = COLORS_TO_RGB[shape_color]
 	label.rotate_x(-PI/2)
 	shape.add_child(label)
 	label.translate(0.1*Vector3.BACK)
@@ -112,7 +114,7 @@ func makeShapeTarget():
 func get_target_objects_and_labels():
 	var target_objects = []
 	var target_labels = []
-	if randi()%3==0:
+	if randi()%len(labels_list)==0:
 		var random_person = just_people_nodes[randi()%len(just_people_nodes)].duplicate()
 		root.add_child(random_person)
 		random_person.position = 4*Vector3.UP
@@ -128,8 +130,8 @@ func get_target_objects_and_labels():
 		var shape_color = shape_and_name[3]
 		var letter_color = shape_and_name[4]
 		# changed : to - because windows doesn't allow : in filepaths
-		var shape_color_string = "%s-%s-%s" % shape_color
-		var letter_color_string = "%s-%s-%s" % letter_color
+		var shape_color_string = "%s" % shape_color
+		var letter_color_string = "%s" % letter_color
 		root.add_child(shape)
 		shape.position = 0.1*Vector3.UP
 		shape.scale=Vector3.ONE*0.8
@@ -153,7 +155,8 @@ func gen_train_image():
 	var pos_idx = 0
 	for obj in target_objects:
 		obj.rotate_y(randf()*TAU)
-		obj.position+=picture_center + positions[pos_idx]+ Vector3(randf()-0.5, 0, randf()-0.5)
+		obj.position = picture_center
+		obj.position += positions[pos_idx]+ Vector3(randf()-0.5, 0, randf()-0.5)
 		pos_idx+=1
 		obj.scale_object_local(randf_range(0.9, 1.1)*Vector3(randf_range(0.6, 1.2),randf_range(0.6, 1.2),randf_range(0.6, 1.2)))
 

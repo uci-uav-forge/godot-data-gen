@@ -52,3 +52,20 @@ def get_letter_box(polygon_points: np.ndarray, img_shape: [], letter_label: str)
     letter_box = LetterBoxInfo(int(x), int(y), int(width), int(height), letter_label)
     return letter_box
                 
+                
+def give_normalized_bounding_box( norm_polygon_array: np.ndarray):
+
+
+    x_coord = norm_polygon_array[:,0]
+    y_coord = norm_polygon_array[:,1]
+
+    if len(x_coord) == 0 or len(y_coord) == 0:
+        # Handle the case where one or both arrays are empty
+        return None
+
+    min_x, min_y = np.min(x_coord), np.min(y_coord)
+    max_x, max_y = np.max(x_coord), np.max(y_coord)
+
+    result_string = ' '.join(map(str, [max_x, max_y, min_x, min_y]))
+
+    return result_string
