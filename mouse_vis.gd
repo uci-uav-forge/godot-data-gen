@@ -6,7 +6,9 @@ extends Camera3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	var rotation_std = 10 
+	var rotation_perturbation = Vector3(randfn(0,rotation_std),randfn(0,rotation_std),randfn(0,rotation_std))
+	self.rotation_degrees = Vector3(-90, -90, 0) + rotation_perturbation
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -19,18 +21,20 @@ func _process(delta):
 	var vfov = 30
 	var focal_len = h/(2*tan(deg_to_rad(vfov/2)))
 	
-	var x_rot = self.rotation_degrees.x
-	var y_rot = self.rotation_degrees.y
-	var z_rot = self.rotation_degrees.z
+	var rot_quat = self.quaternion
 	var camera_position = self.position
 	
 	var cam_look = Vector3(x-w/2, h/2-y, -focal_len)
-	var rotated_vector = cam_look
-	rotated_vector = rotated_vector.rotated(Vector3(1,0,0) ,deg_to_rad(x_rot))
-	rotated_vector = rotated_vector.rotated(Vector3(0,1,0) ,deg_to_rad(y_rot))
-	rotated_vector = rotated_vector.rotated(Vector3(0,0,1) ,deg_to_rad(z_rot))
-	
+	var rotated_vector = rot_quat * cam_look
 	
 	var t = -camera_position[1]/rotated_vector[1]
 	var target_position = camera_position + t*rotated_vector
 	cube.position = target_position
+	
+	print(camera_position)
+	print(rot_quat)
+	print(mouse_pos)
+	print(target_position)
+	print()
+	
+	
