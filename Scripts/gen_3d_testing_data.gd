@@ -1446,9 +1446,9 @@ func takeScreenshot(file_name):
 	save_image(image, file_name)
 
 func place_target(target, position):
+	target.scale_object_local(randf_range(0.9, 1.1)*Vector3(randf_range(0.6, 1.2),randf_range(0.6, 1.2),randf_range(0.6, 1.2)))
 	target.rotate_y(randf()*TAU)
 	target.position = position
-	target.scale_object_local(randf_range(0.9, 1.1)*Vector3(randf_range(0.6, 1.2),randf_range(0.6, 1.2),randf_range(0.6, 1.2)))
 	
 func makeShapeTarget():
 	var shape = shapes_list[randi()%len(shapes_list)].duplicate()
@@ -1516,12 +1516,20 @@ func gen_train_image():
 		get_tree().quit()
 		return
 	self.position = camera_positions[index]
+	
+	var position_noise_std = 1
+	var written_pos = self.position +  Vector3(randfn(0,position_noise_std),randfn(0,position_noise_std),randfn(0,position_noise_std))
 
-	var position_string  = "%d,%d,%d" % [self.position.x, self.position.y, self.position.z]
-	var rotation_string  = "%d,%d,%d" % [self.rotation_degrees.x, self.rotation_degrees.y, self.rotation_degrees.z]
+	var position_string  = "%d,%d,%d" % [written_pos.x, written_pos.y, written_pos.z]
+	var q = self.quaternion
+	var rotation_string  = "%.10f,%.10f,%.10f,%.10f" % [q.x, q.y, q.z, q.w]
 	
 	await get_tree().process_frame
-	takeScreenshot("images/image%s_%s_%s.png" % [index, position_string, rotation_string])
+	takeScreenshot("images/image%s_%s.png" % [index, position_string])
+	# output rotation string to images/rotation{index}.txt
+	var rotation_file = FileAccess.open("user://%s/images/rotation%s.txt" % [data_folder_name, index], FileAccess.WRITE)
+	rotation_file.store_line(rotation_string)
+	rotation_file.close()
 	index+=1
 	scene_ready = true
 
