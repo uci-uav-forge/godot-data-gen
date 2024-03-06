@@ -19,7 +19,6 @@ static func get_people_nodes():
 
 static func save_image(image, data_folder_name, file_name):
 	var save_location_name = "user://%s/%s" % [data_folder_name,file_name]
-	print(save_location_name)
 	image.save_png(save_location_name)
 
 static func takeScreenshot(node, file_name, data_folder_name):
@@ -85,6 +84,7 @@ static func get_symbol_objects(symbols):
 		label.text = symbol
 		label.font = opensans_bold_font
 		label.font_size=100
+		label.outline_size = 0
 		labels_list.append(label)
 
 	return labels_list
