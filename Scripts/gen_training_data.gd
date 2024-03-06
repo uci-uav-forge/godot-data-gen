@@ -1,13 +1,14 @@
 extends Camera3D
 
 var num_imgs = 100
-var rotation_range = 10
+var max_rotation = 10
 var brightness_min = 0.5
 var brightness_max = 1.5
 var output_folder_name = "godot_data"
-var position_noise_std = 1 # noise added to the position of the objects. By default, they are placed randomly on a 3x3 grid centered at the image center.
+var position_noise = 1 # range of uniform noise added to the position of the objects. By default, they are placed randomly on a 3-unit spaced grid centered at the image center.
 var person_probability = 0.5 # probability of a person being in the image
 var max_targets_per_image = 3 # maximum number of targets in an image. The actual number will be uniformly random between 1 and this number
+var emergent_target_probability = 1.0/8 # probability of a target being a person
 
 @onready var scene_ready = true
 @onready var index = 0
@@ -38,8 +39,10 @@ func _ready():
 		backgrounds_list.append(bg_mat)
 
 	positions = []
-	for x in range(-3, 3, 3):
-		for z in range(-3, 3, 3):
+	# ensures that the grid spans *most* of the FOV, erring on the side of caution because we don't want to place objects outside the image.
+	var positions_grid_range = self.position.y * (tan(deg_to_rad(max_rotation)) - tan(deg_to_rad(max_rotation - self.fov/2))) * 0.7
+	for x in range(-positions_grid_range, positions_grid_range, 3):
+		for z in range(-positions_grid_range, positions_grid_range, 3):
 			positions.append(Vector3(x,0,z))
 
 func prepForSegmentation(node, color: Color):
@@ -48,8 +51,7 @@ func prepForSegmentation(node, color: Color):
 		node.material_override.flags_unshaded=true
 		node.material_override.albedo_color = color
 	elif node is Label3D:
-		node.modulate = color
-		node.shaded=false
+		node.hide()
 	for child in node.get_children():
 		prepForSegmentation(child, color)
 
@@ -57,7 +59,7 @@ func prepForSegmentation(node, color: Color):
 func get_target_objects_and_labels():
 	var target_objects = []
 	var target_labels = []
-	if randi()%2==0:
+	if randf()<emergent_target_probability:
 		var random_person = Helpers.gen_person(root)
 		target_objects.append(random_person)
 		target_labels.append("person")
@@ -76,7 +78,7 @@ func gen_train_image():
 	var target_objects_and_labels = get_target_objects_and_labels()
 	var target_objects = target_objects_and_labels[0]
 	var target_labels = target_objects_and_labels[1]
-	self.rotation_degrees = Vector3(randi_range(-90-rotation_range, -90+rotation_range), randi_range(0,360), 0)
+	self.rotation_degrees = Vector3(-90+randi_range(-max_rotation, max_rotation), randi_range(0,360), 0)
 	var dist_from_center = self.position.y * tan(-PI/2-self.rotation.x)
 	var picture_center = Vector3(0,0,dist_from_center).rotated(Vector3.UP, self.rotation.y)
 	
@@ -86,7 +88,7 @@ func gen_train_image():
 	for obj in target_objects:
 		obj.rotate_y(randf()*TAU)
 		obj.position = picture_center
-		obj.position += positions[pos_idx]+ Vector3(randfn(0,position_noise_std), 0, randfn(0,position_noise_std))
+		obj.position += positions[pos_idx]+ Vector3(randf_range(-position_noise, position_noise), 0, randf_range(-position_noise, position_noise))
 		pos_idx+=1
 		obj.scale_object_local(randf_range(0.9, 1.1)*Vector3(randf_range(0.6, 1.2),randf_range(0.6, 1.2),randf_range(0.6, 1.2)))
 
