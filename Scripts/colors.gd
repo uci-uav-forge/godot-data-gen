@@ -2,7 +2,7 @@ extends Object
 
 class_name Colors
 
-static func get_colors_dict() -> Dictionary:
+static func get_dict() -> Dictionary:
 	return {
 		"black": [
 			[0, 0, 0],
