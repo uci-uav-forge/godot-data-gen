@@ -6,6 +6,12 @@ import json
 import numpy as np
 from tqdm import tqdm
 
+user = os.environ["USER"]
+# for linux
+INPUT_DIR = f"/home/{user}/.local/share/godot/app_userdata/forge-godot/godot_data"
+# for windows (change username)
+# input_dir = "/mnt/c/Users/sch90/AppData/Roaming/Godot/app_userdata/forge-godot/godot_data"
+
 def preprocess_img(img):
     # blur image with random kernel size
     kernel_size = 3 + 2*np.random.randint(0, 2)
@@ -50,23 +56,18 @@ def gen_img(num, num_images, input_dir, output_dir, shapes_to_categories):
     cv2.imwrite(f"{output_dir}/images/{split_name}/image{num}.png", img)
 
 def main():
-    user = os.environ["USER"]
     datagen_dir = os.path.dirname(os.path.abspath(__file__))
     categories_to_shapes = json.load(open(f"{datagen_dir}/shape_name_labels.json","r"))
     shapes_to_categories = {shape:category for category, shape in categories_to_shapes.items()}
-    # for linux
-    input_dir = f"/home/{user}/.local/share/godot/app_userdata/forge-godot/godot_data"
-    # for windows (change username)
-    # input_dir = "/mnt/c/Users/sch90/AppData/Roaming/Godot/app_userdata/forge-godot/godot_data"
     output_dir = f"{datagen_dir}/data"
     os.makedirs(output_dir, exist_ok=True)
     for split_name in ["train", "validation", "test"]:
         os.makedirs(f"{output_dir}/labels/{split_name}", exist_ok=True)
         os.makedirs(f"{output_dir}/images/{split_name}", exist_ok=True)
-    num_images = len(os.listdir(f"{input_dir}/images"))
+    num_images = len(os.listdir(f"{INPUT_DIR}/images"))
 
     for i in tqdm(range(num_images)):
-        gen_img(i, num_images, input_dir, output_dir, shapes_to_categories)
+        gen_img(i, num_images, INPUT_DIR, output_dir, shapes_to_categories)
 if __name__ == "__main__":
     main()
 
