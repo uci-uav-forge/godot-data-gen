@@ -1417,9 +1417,10 @@ func _ready():
 	
 	var target_positions_save_file = FileAccess.open("user://%s/labels.txt" % data_folder_name, FileAccess.WRITE)
 	
-	var has_emergent = false # TODO: uncomment this when ready to put people in datset #randi()%2==0
-	var num_targets = 100
+	var has_emergent = randi()%2==0 # TODO: uncomment this when ready to put people in datset #randi()%2==0
+	var num_targets = 5
 	if has_emergent:
+		num_targets -= 1
 		var person = gen_person()
 		place_target(person, positions.pop_front())
 		var pos_string = "%d,%d,%d" % [person.position[0], person.position[1], person.position[2]]
@@ -1431,8 +1432,8 @@ func _ready():
 		var pos_string = "%d,%d,%d" % [target_and_label[0].position[0], target_and_label[0].position[1], target_and_label[0].position[2]]
 		target_positions_save_file.store_line("%s %s" % [target_and_label[1], pos_string])
 
-	global_light.light_energy = randf()*1.5
-	global_light.rotation_degrees = Vector3(randi_range(-30, -150), randi_range(0,360), 0)
+	global_light.light_energy = 0.2+randf()
+	# global_light.rotation_degrees = Vector3(randi_range(-30, -150), randi_range(0,360), 0)
 	
 	print("finished ready!")
 	
