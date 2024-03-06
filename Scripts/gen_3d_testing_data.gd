@@ -43,7 +43,7 @@ func _ready():
 	
 	var target_positions_save_file = FileAccess.open("user://%s/labels.txt" % data_folder_name, FileAccess.WRITE)
 	
-	var has_emergent = randi()%2==0 # TODO: uncomment this when ready to put people in datset #randi()%2==0
+	var has_emergent = randi()%2==0
 	var num_targets = 5
 	if has_emergent:
 		num_targets -= 1
