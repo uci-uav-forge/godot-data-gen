@@ -1,5 +1,5 @@
 # takes dataset with masks generated with godot and turns it into a dataset with labels for YOLOv8
-from data_gen_utils import get_polygon, preprocess_img
+from data_gen_utils import get_polygon, preprocess_img, give_normalized_bounding_box
 import os
 import cv2
 import json
@@ -11,6 +11,7 @@ user = os.environ["USER"]
 INPUT_DIR = f"/home/{user}/.local/share/godot/app_userdata/forge-godot/godot_data"
 # for windows (change username)
 # input_dir = "/mnt/c/Users/sch90/AppData/Roaming/Godot/app_userdata/forge-godot/godot_data"
+
 
 def gen_img(num, num_images, input_dir, output_dir, shapes_to_categories):
     if int(num)<0.85*num_images:
@@ -27,7 +28,7 @@ def gen_img(num, num_images, input_dir, output_dir, shapes_to_categories):
     file_contents = ""
     for mask_file_name in os.listdir(f"{input_dir}/masks/{num}"):
         mask_path = f"{input_dir}/masks/{num}/{mask_file_name}"
-        shape_name = mask_file_name.split("_")[0].split(",")[0] 
+        labels = mask_file_name.split("_")[0].split(",")
         mask = cv2.imread(mask_path)
         polygon = get_polygon(mask)
 
@@ -36,10 +37,11 @@ def gen_img(num, num_images, input_dir, output_dir, shapes_to_categories):
                 tqdm.write(f"no polygon found for {mask_path}")
             return 
         normalized_polygon = polygon / np.array([mask.shape[1], mask.shape[0]])
-        file_contents+=f"{shapes_to_categories[shape_name]} {' '.join(map(str, normalized_polygon.flatten()))}\n"
-    with open(f"{output_dir}/labels/{split_name}/image{num}.txt", "w") as f:
+        
+        bbox_str = give_normalized_bounding_box(normalized_polygon)
+        file_contents+=f"{' '.join(labels)} {bbox_str}\n"
+    with open(f"{output_dir}/all_labels/{split_name}/image{num}.txt", "w") as f:
         f.write(file_contents)
-    cv2.imwrite(f"{output_dir}/images/{split_name}/image{num}.png", img)
 
 def main():
     datagen_dir = os.path.dirname(os.path.abspath(__file__))
@@ -48,7 +50,7 @@ def main():
     output_dir = f"{datagen_dir}/data"
     os.makedirs(output_dir, exist_ok=True)
     for split_name in ["train", "validation", "test"]:
-        os.makedirs(f"{output_dir}/labels/{split_name}", exist_ok=True)
+        os.makedirs(f"{output_dir}/all_labels/{split_name}", exist_ok=True)
         os.makedirs(f"{output_dir}/images/{split_name}", exist_ok=True)
     num_images = len(os.listdir(f"{INPUT_DIR}/images"))
 
@@ -56,5 +58,3 @@ def main():
         gen_img(i, num_images, INPUT_DIR, output_dir, shapes_to_categories)
 if __name__ == "__main__":
     main()
-
-    
