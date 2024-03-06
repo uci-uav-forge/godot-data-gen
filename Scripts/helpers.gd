@@ -88,3 +88,20 @@ static func get_symbol_objects(symbols):
 		labels_list.append(label)
 
 	return labels_list
+
+# https://godotengine.org/qa/5175/how-to-get-all-the-files-inside-a-folder
+static func list_files_in_directory(path):
+	var files = []
+	var dir = DirAccess.open(path)
+	dir.list_dir_begin()
+
+	while true:
+		var file = dir.get_next()
+		if file == "":
+			break
+		elif not file.begins_with(".") and not file.ends_with(".import"):
+			files.append(file)
+
+	dir.list_dir_end()
+
+	return files

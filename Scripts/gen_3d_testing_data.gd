@@ -3,7 +3,6 @@ extends Camera3D
 @onready var scene_ready = true
 @onready var index = 0
 @onready var root = get_tree().get_root().get_node("Root")
-@onready var just_people_nodes = Helpers.get_people_nodes() 
 var res_directory
 @onready var global_light: Light3D = root.get_node("Light")
 @onready var world_floor = root.get_node("Floor")
