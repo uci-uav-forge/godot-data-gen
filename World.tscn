@@ -1,7 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://ct4nj2i38log5"]
+[gd_scene load_steps=11 format=3 uid="uid://ct4nj2i38log5"]
 
-[ext_resource type="Texture2D" uid="uid://fklcp4pfipgr" path="res://backgrounds/airport_1.png" id="1_55rm6"]
-[ext_resource type="Script" path="res://Scripts/gen_training_data.gd" id="2_plc6t"]
+[ext_resource type="Texture2D" uid="uid://qqr4upq7mv08" path="res://backgrounds/airport_1.png" id="1_55rm6"]
+[ext_resource type="Script" path="res://Scripts/gen_3d_testing_data.gd" id="2_id3j8"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_1ifvu"]
 
@@ -73,10 +73,15 @@ shader_parameter/uv2_scale = Vector3(1, 1, 1)
 shader_parameter/uv2_offset = Vector3(0, 0, 0)
 shader_parameter/texture_albedo = ExtResource("1_55rm6")
 
+[sub_resource type="BoxMesh" id="BoxMesh_waln6"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_2b1te"]
+
 [node name="Root" type="Node3D"]
 
 [node name="black_bg" type="MeshInstance3D" parent="."]
 transform = Transform3D(1000, 0, 0, 0, 1000, 0, 0, 0, 1000, 0, -1, 0)
+visible = false
 mesh = SubResource("PlaneMesh_1ifvu")
 skeleton = NodePath("../Floor")
 surface_material_override/0 = SubResource("StandardMaterial3D_at7oi")
@@ -90,13 +95,29 @@ transform = Transform3D(139.98, 0, 53.9043, 0, 0.002, 0, -53.9043, 0, 139.98, 0,
 mesh = SubResource("PlaneMesh_ugkvt")
 surface_material_override/0 = SubResource("ShaderMaterial_u0240")
 
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(0.0174524, 0.999239, -0.0348942, 0, 0.0348995, 0.999391, 0.999848, -0.0174418, 0.000609079, -88, 76, 40)
+current = true
+fov = 30.0
+script = ExtResource("2_id3j8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera"]
+transform = Transform3D(0.1, 0, 4.9738e-14, 0, 0.1, 1.64224e-12, 5.55112e-17, 5.37764e-17, 100, 0, 0, 0)
+visible = false
+mesh = SubResource("BoxMesh_waln6")
+
 [node name="Viewport" type="SubViewport" parent="."]
-size = Vector2i(640, 640)
+size = Vector2i(1920, 1080)
 render_target_clear_mode = 2
 render_target_update_mode = 3
 
-[node name="Camera" type="Camera3D" parent="Viewport"]
-transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, 0, 75, 0)
-current = true
-fov = 6.7
-script = ExtResource("2_plc6t")
+[node name="ray" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 100, 0, 0, 0)
+visible = false
+mesh = SubResource("BoxMesh_2b1te")
+skeleton = NodePath("../cube")
+
+[node name="cube" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+visible = false
+mesh = SubResource("BoxMesh_2b1te")
