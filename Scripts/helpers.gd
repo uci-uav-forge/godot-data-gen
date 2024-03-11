@@ -26,7 +26,7 @@ static func takeScreenshot(node, file_name, data_folder_name):
 	save_image(image, data_folder_name, file_name)
 
 static func place_target(target, position):
-	target.scale_object_local(randf_range(0.9, 1.1)*Vector3(randf_range(0.6, 1.2),randf_range(0.6, 1.2),randf_range(0.6, 1.2)))
+	target.scale_object_local(randf_range(0.6, 4)*Vector3(randf_range(0.6, 1.2),randf_range(0.6, 1.2),randf_range(0.6, 1.2)))
 	target.rotate_y(randf()*TAU)
 	target.position = position
 	
@@ -36,6 +36,7 @@ static func makeShapeTarget():
 	var colors_dict = Colors.get_dict()
 	var shape = shapes_list[randi()%len(shapes_list)].duplicate()
 	shape.material_override = StandardMaterial3D.new()
+	shape.material_override.metallic = 0.6 # empirically found to make it blend in with background more with low light
 	var all_colors = colors_dict.keys()
 	var first_color_index = randi()%len(all_colors)
 	var shape_color_name = all_colors[first_color_index]
