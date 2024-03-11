@@ -12,6 +12,17 @@ INPUT_DIR = f"/home/{user}/.local/share/godot/app_userdata/forge-godot/godot_dat
 # for windows (change username)
 # input_dir = "/mnt/c/Users/sch90/AppData/Roaming/Godot/app_userdata/forge-godot/godot_data"
 
+SHAPES = [
+ "circle",
+ "semicircle",
+ "quartercircle",
+ "triangle",
+ "rectangle",
+ "pentagon",
+ "star",
+ "cross",
+ "person"
+]
 
 def gen_img(num, num_images, input_dir, output_dir, shapes_to_categories):
     if int(num)<0.85*num_images:
@@ -26,6 +37,7 @@ def gen_img(num, num_images, input_dir, output_dir, shapes_to_categories):
         return
     img = preprocess_img(img)
     file_contents = ""
+    shape_file_contents = ""
     for mask_file_name in os.listdir(f"{input_dir}/masks/{num}"):
         mask_path = f"{input_dir}/masks/{num}/{mask_file_name}"
         labels = mask_file_name.split("_")[0].split(",")
@@ -40,8 +52,11 @@ def gen_img(num, num_images, input_dir, output_dir, shapes_to_categories):
         
         bbox_str = give_normalized_bounding_box(normalized_polygon)
         file_contents+=f"{' '.join(labels)} {bbox_str}\n"
-    with open(f"{output_dir}/all_labels/{split_name}/image{num}.txt", "w") as f:
+        shape_file_contents+=f"{SHAPES.index(labels[0])} {bbox_str}"
+    with open(f"{output_dir}/all_box_labels/{split_name}/image{num}.txt", "w") as f:
         f.write(file_contents)
+    with open(f"{output_dir}/shape_box_labels/{split_name}/image{num}.txt", "w") as f:
+        f.write(shape_file_contents)
 
 def main():
     datagen_dir = os.path.dirname(os.path.abspath(__file__))
@@ -50,7 +65,8 @@ def main():
     output_dir = f"{datagen_dir}/data"
     os.makedirs(output_dir, exist_ok=True)
     for split_name in ["train", "validation", "test"]:
-        os.makedirs(f"{output_dir}/all_labels/{split_name}", exist_ok=True)
+        os.makedirs(f"{output_dir}/all_box_labels/{split_name}", exist_ok=True)
+        os.makedirs(f"{output_dir}/shape_box_labels/{split_name}", exist_ok=True)
         os.makedirs(f"{output_dir}/images/{split_name}", exist_ok=True)
     num_images = len(os.listdir(f"{INPUT_DIR}/images"))
 

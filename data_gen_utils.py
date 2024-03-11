@@ -54,7 +54,7 @@ def get_letter_box(polygon_points: np.ndarray, img_shape: [], letter_label: str)
                 
                 
 def give_normalized_bounding_box( norm_polygon_array: np.ndarray):
-
+    '''Returns bounding box as proportion of image dimensions, x_center,y_center,w,h'''
 
     x_coord = norm_polygon_array[:,0]
     y_coord = norm_polygon_array[:,1]
@@ -65,8 +65,12 @@ def give_normalized_bounding_box( norm_polygon_array: np.ndarray):
 
     min_x, min_y = np.min(x_coord), np.min(y_coord)
     max_x, max_y = np.max(x_coord), np.max(y_coord)
+    w = max_x - min_x
+    h = max_y - min_y
+    x = (max_x+min_x)/2
+    y = (max_y+min_y)/2
 
-    result_string = ' '.join(map(str, [max_x, max_y, min_x, min_y]))
+    result_string = ' '.join(map(str, [x,y,w,h]))
 
     return result_string
 
