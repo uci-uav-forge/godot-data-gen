@@ -1,6 +1,6 @@
 extends Camera3D
 
-var num_imgs = 10_000
+var num_imgs = 100
 var max_rotation = 10
 var brightness_min = 0.1
 var brightness_max = 1.5
@@ -20,6 +20,7 @@ var res_directory
 
 
 func _ready():
+	print(output_folder_name)
 	set_physics_process(false)
 	randomize()
 	
@@ -37,7 +38,7 @@ func _ready():
 		bg_mat.albedo_texture = background
 		backgrounds_list.append(bg_mat)
 
-func generatePositions(spacing: int = 3):
+func generatePositions(spacing: int = 4):
 	var positions = []
 	# ensures that the grid spans *most* of the FOV, erring on the side of caution because we don't want to place objects outside the image.
 	var positions_grid_range = self.position.y * (tan(deg_to_rad(max_rotation)) - tan(deg_to_rad(max_rotation - self.fov/2))) * 0.7
@@ -80,7 +81,14 @@ func gen_train_image():
 	var target_objects_and_labels = get_target_objects_and_labels()
 	var target_objects = target_objects_and_labels[0]
 	var target_labels = target_objects_and_labels[1]
-	self.fov = randi_range(30,60)
+	var num_targets = len(target_objects)
+
+	# self.fov is used in generatePositions so needs to be set before.
+	if num_targets == 0:
+		self.fov = randi_range(20,60)
+	else:
+		self.fov = 7 + float(num_targets)/max_targets_per_image * 80 + randi_range(-5,5)
+
 	self.rotation_degrees = Vector3(-90+randi_range(-max_rotation, max_rotation), randi_range(0,360), 0)
 	var dist_from_center = self.position.y * tan(-PI/2-self.rotation.x)
 	var picture_center = Vector3(0,0,dist_from_center).rotated(Vector3.UP, self.rotation.y)
@@ -96,7 +104,7 @@ func gen_train_image():
 		obj.scale_object_local(randf_range(0.9, 1.1)*Vector3(randf_range(0.6, 1.2),randf_range(0.6, 1.2),randf_range(0.6, 1.2)))
 
 	global_light.light_energy = randf_range(brightness_min, brightness_max)
-	global_light.rotation_degrees = Vector3(randi_range(-30, -150), randi_range(0,360), 0)
+	global_light.rotation_degrees = Vector3(randi_range(-5, -175), randi_range(0,360), 0)
 	
 	world_floor.material_override = backgrounds_list[randi()%len(backgrounds_list)]
 	world_floor.scale = Vector3(randi_range(50, 100), 0.001, randi_range(50, 100))
