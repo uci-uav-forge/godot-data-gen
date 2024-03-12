@@ -98,7 +98,8 @@ surface_material_override/0 = SubResource("StandardMaterial3D_at7oi")
 
 [node name="Light" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.967661, -0.252255, -1.10264e-08, 0, -4.37114e-08, 1, -0.252255, -0.967661, -4.22978e-08, 0, 27.5242, 0)
-light_energy = 0.0
+light_energy = 1.616
+shadow_enabled = true
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 transform = Transform3D(139.98, 0, 53.9043, 0, 0.002, 0, -53.9043, 0, 139.98, 0, -0.1, -7.354)
@@ -137,6 +138,7 @@ environment = SubResource("Environment_0r861")
 camera_attributes = SubResource("CameraAttributesPractical_hn3v6")
 
 [node name="rectangle" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 visible = false
 mesh = ExtResource("3_r5hbd")
 surface_material_override/0 = SubResource("StandardMaterial3D_dy5oi")
