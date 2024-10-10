@@ -1,6 +1,6 @@
 extends Camera3D
 
-var num_imgs = 10_000
+var num_imgs = 100
 var max_rotation = 10
 var brightness_min = 0.1
 var brightness_max = 1.5
@@ -29,6 +29,9 @@ func _ready():
 	res_directory = DirAccess.open("user://%s" % output_folder_name)
 	res_directory.make_dir("images")
 	res_directory.make_dir("masks")
+	
+	
+	print("Results Directory: %s" % res_directory.get_current_dir())
 	
 	var backgrounds_directory_list = Helpers.list_files_in_directory("res://backgrounds")
 	for background_path in backgrounds_directory_list:
@@ -61,18 +64,13 @@ func prepForSegmentation(node, color: Color):
 func get_target_objects_and_labels():
 	var target_objects = []
 	var target_labels = []
-	if randf()<emergent_target_probability:
-		var random_person = Helpers.gen_person(root)
-		target_objects.append(random_person)
-		target_labels.append("person")
+	
 	var num_shapes = randi()%(max_targets_per_image+1)
-	for _s in range(num_shapes):
-		var shape_and_name = Helpers.gen_target(root)
-		var target_obj = shape_and_name[0]
-		var label_string = shape_and_name[1]
-
-		target_objects.append(target_obj)
-		target_labels.append(label_string)
+	for _i in range(num_shapes):
+		var target = Helpers.gen_targets(root)
+		target_objects.append(target[0])
+		target_labels.append(target[1])
+	
 	return [target_objects, target_labels]
 
 func gen_train_image():

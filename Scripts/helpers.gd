@@ -1,4 +1,3 @@
-
 extends Object
 
 class_name Helpers
@@ -61,6 +60,15 @@ static func gen_person(root):
 	random_person.position = 4*Vector3.UP
 	random_person.scale= 0.1*Vector3.ONE
 	return random_person
+
+static func gen_targets(root):
+	var targets = preload("res://Targets.tscn").instantiate().get_children()
+	var one_target = targets[randi_range(0,len(targets)-1)].duplicate() # randomly chosen
+	one_target.scale = one_target.scale*0.10
+	root.add_child(one_target)
+	var name = one_target.name
+	return [one_target, name]
+	
 
 static func gen_target(root):
 	var shape_and_name = makeShapeTarget()
