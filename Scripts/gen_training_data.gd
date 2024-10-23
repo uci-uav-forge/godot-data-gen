@@ -1,6 +1,6 @@
 extends Camera3D
 
-var num_imgs = 100
+var num_imgs = 10
 var max_rotation = 10
 var brightness_min = 0.1
 var brightness_max = 1.5
@@ -78,6 +78,8 @@ func gen_train_image():
 	var target_objects_and_labels = get_target_objects_and_labels()
 	var target_objects = target_objects_and_labels[0]
 	var target_labels = target_objects_and_labels[1]
+	print(target_labels)
+	
 	self.fov = randi_range(30,60)
 	self.rotation_degrees = Vector3(-90+randi_range(-max_rotation, max_rotation), randi_range(0,360), 0)
 	var dist_from_center = self.position.y * tan(-PI/2-self.rotation.x)

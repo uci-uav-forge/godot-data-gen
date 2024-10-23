@@ -1,8 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://ct4nj2i38log5"]
+[gd_scene load_steps=13 format=3 uid="uid://ct4nj2i38log5"]
 
 [ext_resource type="Texture2D" uid="uid://ckno7icbc24b7" path="res://backgrounds/airport_1.png" id="1_55rm6"]
 [ext_resource type="Script" path="res://Scripts/gen_training_data.gd" id="2_3gmy4"]
-[ext_resource type="ArrayMesh" uid="uid://c5tf6d3vfoywo" path="res://3d/square.obj" id="3_r5hbd"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_1ifvu"]
 
@@ -82,11 +81,6 @@ shader_parameter/texture_albedo = ExtResource("1_55rm6")
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_hn3v6"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dy5oi"]
-albedo_color = Color(1, 0, 0, 1)
-metallic = 0.6
-metallic_specular = 1.0
-
 [node name="Root" type="Node3D"]
 
 [node name="black_bg" type="MeshInstance3D" parent="."]
@@ -135,8 +129,3 @@ mesh = SubResource("BoxMesh_2b1te")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_0r861")
 camera_attributes = SubResource("CameraAttributesPractical_hn3v6")
-
-[node name="rectangle" type="MeshInstance3D" parent="."]
-visible = false
-mesh = ExtResource("3_r5hbd")
-surface_material_override/0 = SubResource("StandardMaterial3D_dy5oi")
