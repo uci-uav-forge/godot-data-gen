@@ -1,0 +1,44 @@
+[gd_scene load_steps=13 format=3 uid="uid://dwoafodpf0ww6"]
+
+[ext_resource type="Texture2D" uid="uid://cu2ja5p0v7cfa" path="res://3dNew/trashcan/texture_plastic_gray.jpg" id="1_wcx1g"]
+[ext_resource type="ArrayMesh" uid="uid://cybktvak3qbl" path="res://3dNew/trashcan/10896_Trash_can_v3_LOD3.obj" id="2_k6uqy"]
+[ext_resource type="Texture2D" uid="uid://82b4oryauutq" path="res://3dNew/tire/NISSAN B.jpg" id="3_vah6e"]
+[ext_resource type="ArrayMesh" uid="uid://cc5vrn82vg7hg" path="res://3dNew/tire/Tire.obj" id="4_qhukx"]
+[ext_resource type="Texture2D" uid="uid://b7l063nvskqkv" path="res://3dNew/cone/Textures/PlyonTexture.tga" id="5_7f27k"]
+[ext_resource type="ArrayMesh" uid="uid://dcimok0th2n4w" path="res://3dNew/cone/objPylon.obj" id="6_oxmrp"]
+[ext_resource type="Texture2D" uid="uid://blf8q06bav5uh" path="res://3dNew/basketball/maps/NBA BASKETBALL DIFFUSE.tga" id="7_s10ai"]
+[ext_resource type="ArrayMesh" uid="uid://fx3ssofhhb0e" path="res://3dNew/basketball/NBA BASKETBALL.obj" id="8_x0170"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3pkli"]
+albedo_texture = ExtResource("1_wcx1g")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_llext"]
+albedo_texture = ExtResource("3_vah6e")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lw4t0"]
+albedo_texture = ExtResource("5_7f27k")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vx04g"]
+albedo_texture = ExtResource("7_s10ai")
+
+[node name="Spatial" type="Node3D"]
+
+[node name="trashcan" type="MeshInstance3D" parent="."]
+transform = Transform3D(200, 0, 0, 0, -8.74228e-06, 200, 0, -200, -8.74228e-06, 78, 0, 0)
+material_override = SubResource("StandardMaterial3D_3pkli")
+mesh = ExtResource("2_k6uqy")
+
+[node name="tires" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, -42, 0, 0)
+material_override = SubResource("StandardMaterial3D_llext")
+mesh = ExtResource("4_qhukx")
+
+[node name="cone" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 0)
+material_override = SubResource("StandardMaterial3D_lw4t0")
+mesh = ExtResource("6_oxmrp")
+
+[node name="basketball" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_vx04g")
+mesh = ExtResource("8_x0170")
