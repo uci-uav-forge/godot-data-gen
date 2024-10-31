@@ -8,25 +8,28 @@ from tqdm import tqdm
 from pathlib import Path
 import yaml
 
-user = os.environ["USER"]
-# for linux
-dataset_dirs = sorted(list(Path(f"/home/{user}/.local/share/godot/app_userdata/forge-godot").glob('godot_data*')))
+# user = os.environ["USER"]
+# # for linux
+# dataset_dirs = sorted(list(Path(f"/home/{user}/.local/share/godot/app_userdata/forge-godot").glob('godot_data*')))
 
-for idx, dataset_dir in enumerate(dataset_dirs):
-    num_frames = sum(1 for _ in (dataset_dir / 'images').glob("*.png"))
-    print(f"{idx}\t{num_frames} frames\t{str(dataset_dir).split('logs/')[-1]}")
+# for idx, dataset_dir in enumerate(dataset_dirs):
+#     num_frames = sum(1 for _ in (dataset_dir / 'images').glob("*.png"))
+#     print(f"{idx}\t{num_frames} frames\t{str(dataset_dir).split('logs/')[-1]}")
 
-dir_selected = input(
-    "Enter index of log directory to process (default -1, last one in list): "
-)
-if dir_selected == "":
-    dir_index = -1
-else:
-    dir_index = int(dir_selected)
-INPUT_DIR = dataset_dirs[dir_index]
+# dir_selected = input(
+#     "Enter index of log directory to process (default -1, last one in list): "
+# )
+# if dir_selected == "":
+#     dir_index = -1
+# else:
+#     dir_index = int(dir_selected)
+# INPUT_DIR = dataset_dirs[dir_index]
 
 # for windows (change username)
 # input_dir = "/mnt/c/Users/sch90/AppData/Roaming/Godot/app_userdata/forge-godot/godot_data"
+
+INPUT_DIR = "C:\\Users\\Bran\\AppData\\Roaming\\Godot\\app_userdata\\forge-godot\\godot_data_1730248253"
+
 
 def gen_img(num, num_images, input_dir, output_dir, shapes_to_categories):
     if int(num)<0.85*num_images:
@@ -79,6 +82,7 @@ def main():
             }
         },
         open(f"{output_dir}/dataset_config.yaml", "w"),
+        
         sort_keys=False
     )
 
