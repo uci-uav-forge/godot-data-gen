@@ -1,6 +1,6 @@
 extends Camera3D
 
-var num_imgs = 10
+var num_imgs = 10_000
 var max_rotation = 10
 var brightness_min = 0.1
 var brightness_max = 1.5
