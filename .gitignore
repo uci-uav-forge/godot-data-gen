@@ -5,3 +5,5 @@ masks
 __pycache__
 data
 letter_data
+runs
+*.pt
