@@ -19,7 +19,7 @@ static func gen_targets(root):
 	var i = randi_range(0,len(targets)-1)
 	var target = targets[i].duplicate() # randomly chosen
 	var name = targets[i].name
-	target.scale = target.scale*0.05 # hand chosen value, adjust as needed
+	target.scale = target.scale*0.025 # hand chosen value, adjust as needed
 	root.add_child(target)
 	return [target, name]
 
