@@ -81,7 +81,7 @@ mesh = ExtResource("20_7ihbl")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -2200, 0, 0)
 mesh = ExtResource("21_86thq")
 
-[node name="tennis racket" type="MeshInstance3D" parent="."]
+[node name="tennisracket" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -2301.02, -3.05176e-05, -0.00634766)
 mesh = ExtResource("22_gd064")
 
