@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://ct4nj2i38log5"]
 
-[ext_resource type="Texture2D" uid="uid://ckno7icbc24b7" path="res://backgrounds/airport_1.png" id="1_55rm6"]
+[ext_resource type="Texture2D" uid="uid://dmg1upxq0lf6k" path="res://backgrounds/airport_1.png" id="1_55rm6"]
 [ext_resource type="Script" path="res://Scripts/gen_training_data.gd" id="2_3gmy4"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_1ifvu"]
