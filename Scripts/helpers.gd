@@ -13,9 +13,10 @@ static func place_target(target, position):
 	target.scale_object_local(randf_range(0.6, 4)*Vector3(randf_range(0.6, 1.2),randf_range(0.6, 1.2),randf_range(0.6, 1.2)))
 	target.rotate_y(randf()*TAU)
 	target.position = position
+	
+static var targets = preload("res://Targets.tscn").instantiate().get_children()
 
 static func gen_targets(root):
-	var targets = preload("res://Targets.tscn").instantiate().get_children()
 	var i = randi_range(0,len(targets)-1)
 	var target = targets[i].duplicate() # randomly chosen
 	var name = targets[i].name
