@@ -4,7 +4,7 @@ import os
 from dataclasses import dataclass
 
 
-def get_polygon(shape_img: cv2.Mat) -> np.ndarray:
+def get_polygon(shape_img: np.ndarray) -> np.ndarray:
     '''
     Returns the enclosing polygon of the shape in the image. The polygon is a list of points, each point being a list of 2 coordinates.
     '''
