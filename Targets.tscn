@@ -1,28 +1,30 @@
-[gd_scene load_steps=28 format=3 uid="uid://dwoafodpf0ww6"]
+[gd_scene load_steps=31 format=3 uid="uid://dwoafodpf0ww6"]
 
-[ext_resource type="Texture2D" uid="uid://d1tf255yuj05w" path="res://3dNew/basketball/maps/NBA BASKETBALL DIFFUSE.tga" id="7_s10ai"]
-[ext_resource type="ArrayMesh" uid="uid://cbcqw71k6pk2i" path="res://3dNew/basketball/NBA BASKETBALL.obj" id="8_x0170"]
-[ext_resource type="ArrayMesh" uid="uid://bbndoevlsbuvs" path="res://3dNew/mannequin/WoodenLarry.obj" id="9_ly7g3"]
-[ext_resource type="Texture2D" uid="uid://dnhegtae4lwve" path="res://3dNew/car_911_gt2/skin07/0000.BMP" id="10_rh2cc"]
-[ext_resource type="ArrayMesh" uid="uid://bj8i7eyn2w3ck" path="res://3dNew/car_911_gt2/Porsche_911_GT2.obj" id="11_ch5ak"]
-[ext_resource type="Texture2D" uid="uid://bsecjsvmkvtqi" path="res://3dNew/boat/Texture/wood2.jpg" id="12_ao8cv"]
-[ext_resource type="ArrayMesh" uid="uid://dawvd2ufmy2ub" path="res://3dNew/boat/boat.obj" id="13_hoo6g"]
-[ext_resource type="PackedScene" uid="uid://dad2p4e0qf65o" path="res://3dNew/car_gls_580/uploads_files_2787791_Mercedes+Benz+GLS+580.fbx" id="14_8u0eo"]
-[ext_resource type="PackedScene" uid="uid://bttmegyxwqu64" path="res://3dNew/stopsign/StopSign.fbx" id="15_s76kx"]
-[ext_resource type="PackedScene" uid="uid://dv3ykr4rhitsb" path="res://3dNew/plane_hawker_tempest_mk5/Hawker Tempest Mk V.gltf" id="16_211by"]
-[ext_resource type="ArrayMesh" uid="uid://bk7mqkun6q6i2" path="res://3dNew/snowboard/10535_Snowboard_v1_L3.obj" id="18_raqpw"]
-[ext_resource type="ArrayMesh" uid="uid://p58fsy84hydk" path="res://3dNew/umbrella/12984_beach_umbrella_v1_L2.obj" id="19_f4yfp"]
-[ext_resource type="ArrayMesh" uid="uid://dosv8dojdujso" path="res://3dNew/baseballbat/10485_Baseball_bat_v1_max2011_iteration-2.obj" id="20_7ihbl"]
-[ext_resource type="ArrayMesh" uid="uid://bms2j8h1t63gv" path="res://3dNew/bed/California_King_Size_Bed_With_Thyme_Sheets_Pine_V1_NEW.obj" id="21_86thq"]
-[ext_resource type="ArrayMesh" uid="uid://b7rvj5cil6et" path="res://3dNew/tennis/10540_Tennis_racket_V2_L3.obj" id="22_gd064"]
-[ext_resource type="ArrayMesh" uid="uid://cl354aitwbw8w" path="res://3dNew/skis/12321_skis_v1_l3.obj" id="23_y5lpq"]
-[ext_resource type="ArrayMesh" uid="uid://cqt3lakbn83aq" path="res://3dNew/suitcase/15214_Suitcase-Medium_v1_NEW.obj" id="24_f1j7g"]
-[ext_resource type="PackedScene" uid="uid://dop6vdppo8jae" path="res://3dNew/motorcycle/yehoma_fbx_no_stand_circle_thingy.gltf" id="25_cunyh"]
-[ext_resource type="PackedScene" uid="uid://bt8q47lqbwfe3" path="res://3dNew/soccerball/soccerball_only.gltf" id="26_mcxfw"]
-[ext_resource type="Texture2D" uid="uid://dwi3fr3jxxfuw" path="res://3dNew/freedomfootball/tex/football_diffuse_no_ao.jpg" id="27_27b76"]
-[ext_resource type="ArrayMesh" uid="uid://c53t5abxtxa7a" path="res://3dNew/freedomfootball/football.obj" id="28_rvuah"]
-[ext_resource type="ArrayMesh" uid="uid://beog6g0tqqccg" path="res://3dNew/volleyball/10541_volleyball_V1_Iterations-2.obj" id="29_8keae"]
-[ext_resource type="ArrayMesh" uid="uid://bpikfj6x4ae0k" path="res://3dNew/mattress/Mattress.obj" id="30_gdy2b"]
+[ext_resource type="Texture2D" uid="uid://bf8btvfhld3e2" path="res://3dNew/basketball/maps/NBA BASKETBALL DIFFUSE.tga" id="7_s10ai"]
+[ext_resource type="ArrayMesh" uid="uid://o02y0kisi60g" path="res://3dNew/basketball/NBA BASKETBALL.obj" id="8_x0170"]
+[ext_resource type="ArrayMesh" uid="uid://bourechanh70" path="res://3dNew/mannequin/WoodenLarry.obj" id="9_ly7g3"]
+[ext_resource type="Texture2D" uid="uid://bdjp54i0g8vqe" path="res://3dNew/car_911_gt2/skin07/0000.BMP" id="10_rh2cc"]
+[ext_resource type="ArrayMesh" uid="uid://re5ajhfhisb4" path="res://3dNew/car_911_gt2/Porsche_911_GT2.obj" id="11_ch5ak"]
+[ext_resource type="Texture2D" uid="uid://by8adpiy4pou3" path="res://3dNew/boat/Texture/wood2.jpg" id="12_ao8cv"]
+[ext_resource type="ArrayMesh" uid="uid://doa820u7lewpg" path="res://3dNew/boat/boat.obj" id="13_hoo6g"]
+[ext_resource type="PackedScene" uid="uid://b1balcex65qsm" path="res://3dNew/car_gls_580/uploads_files_2787791_Mercedes+Benz+GLS+580.fbx" id="14_8u0eo"]
+[ext_resource type="PackedScene" uid="uid://dps385fk48d2c" path="res://3dNew/stopsign/StopSign.fbx" id="15_s76kx"]
+[ext_resource type="PackedScene" uid="uid://x6i2bkvpvrfu" path="res://3dNew/plane_hawker_tempest_mk5/Hawker Tempest Mk V.gltf" id="16_211by"]
+[ext_resource type="ArrayMesh" uid="uid://b6d5pwwnv3qyo" path="res://3dNew/snowboard/10535_Snowboard_v1_L3.obj" id="18_raqpw"]
+[ext_resource type="ArrayMesh" uid="uid://br6bbyttq0d5w" path="res://3dNew/umbrella/12984_beach_umbrella_v1_L2.obj" id="19_f4yfp"]
+[ext_resource type="ArrayMesh" uid="uid://c8oyqsjdx63c0" path="res://3dNew/baseballbat/10485_Baseball_bat_v1_max2011_iteration-2.obj" id="20_7ihbl"]
+[ext_resource type="ArrayMesh" uid="uid://bg5eo41cknnj7" path="res://3dNew/bed/California_King_Size_Bed_With_Thyme_Sheets_Pine_V1_NEW.obj" id="21_86thq"]
+[ext_resource type="ArrayMesh" uid="uid://b0caf6kjjkq1d" path="res://3dNew/tennis/10540_Tennis_racket_V2_L3.obj" id="22_gd064"]
+[ext_resource type="ArrayMesh" uid="uid://if2lqa74wd3w" path="res://3dNew/skis/12321_skis_v1_l3.obj" id="23_y5lpq"]
+[ext_resource type="ArrayMesh" uid="uid://k17frqpq8iw2" path="res://3dNew/suitcase/15214_Suitcase-Medium_v1_NEW.obj" id="24_f1j7g"]
+[ext_resource type="PackedScene" uid="uid://bhajkk8qyloso" path="res://3dNew/busses/monster-truck-bus.fbx" id="24_o2nfu"]
+[ext_resource type="PackedScene" uid="uid://h0at5y2oq3u" path="res://3dNew/motorcycle/yehoma_fbx_no_stand_circle_thingy.gltf" id="25_cunyh"]
+[ext_resource type="PackedScene" uid="uid://dh2r2l434e51q" path="res://3dNew/busses/school-bus.fbx" id="25_gxmo6"]
+[ext_resource type="PackedScene" uid="uid://iipo0tuvhbcx" path="res://3dNew/soccerball/soccerball_only.gltf" id="26_mcxfw"]
+[ext_resource type="Texture2D" uid="uid://cnf7s6h5g3m8g" path="res://3dNew/freedomfootball/tex/football_diffuse_no_ao.jpg" id="27_27b76"]
+[ext_resource type="ArrayMesh" uid="uid://dqrbx58ch60xq" path="res://3dNew/freedomfootball/football.obj" id="28_rvuah"]
+[ext_resource type="ArrayMesh" uid="uid://07ef2pp8hxii" path="res://3dNew/volleyball/10541_volleyball_V1_Iterations-2.obj" id="29_8keae"]
+[ext_resource type="ArrayMesh" uid="uid://b8yjhltrrdqk0" path="res://3dNew/mattress/Mattress.obj" id="30_gdy2b"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7tup8"]
 albedo_texture = ExtResource("10_rh2cc")
@@ -36,6 +38,9 @@ albedo_texture = ExtResource("27_27b76")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vx04g"]
 albedo_texture = ExtResource("7_s10ai")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3m5nv"]
+albedo_color = Color(0.233762, 0.0521615, 1.20327e-08, 1)
+
 [node name="Spatial" type="Node3D"]
 
 [node name="mannequin" type="MeshInstance3D" parent="."]
@@ -48,33 +53,33 @@ mesh = ExtResource("9_ly7g3")
 skeleton = NodePath("../mannequin")
 
 [node name="car1" type="MeshInstance3D" parent="."]
-transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, -200, 0, 0)
+transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, -200, 0, 0)
 material_override = SubResource("StandardMaterial3D_7tup8")
 mesh = ExtResource("11_ch5ak")
 
 [node name="car2" parent="." instance=ExtResource("14_8u0eo")]
-transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, -415.107, 0, 201.502)
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -317.246, -6.6985, 160.15)
 
 [node name="motorcycle" parent="." instance=ExtResource("25_cunyh")]
-transform = Transform3D(1000, 0, 0, 0, 1000, 0, 0, 0, 1000, -1398.27, 0, -13.1932)
+transform = Transform3D(500, 0, 0, 0, 500, 0, 0, 0, 500, -59.5313, 0, -13.1932)
 
 [node name="boat" type="MeshInstance3D" parent="."]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -428.866, 0, -27.7132)
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -428.866, 0, -27.7132)
 material_override = SubResource("StandardMaterial3D_5urbe")
 mesh = ExtResource("13_hoo6g")
 
 [node name="plane1" parent="." instance=ExtResource("16_211by")]
-transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, -742.151, 0, 22.1706)
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -742.151, 13, 22.1706)
 
 [node name="stopsign" parent="." instance=ExtResource("15_s76kx")]
-transform = Transform3D(5.73206e-12, 0.000131134, -3000, 3000, -0.000131134, 0, -0.000131134, -3000, -0.000131134, -21.2227, 0, 352.318)
+transform = Transform3D(5.73206e-12, 0.000131134, -3000, 3000, -0.000131134, 0, -0.000131134, -3000, -0.000131134, -21.2227, 0, 436.594)
 
 [node name="snowboard" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -127.677, 0, 343.102)
 mesh = ExtResource("18_raqpw")
 
 [node name="umbrella" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -270.137, 0, 331.791)
+transform = Transform3D(1, 0, 0, 0, -0.707107, 0.707107, 0, -0.707107, -0.707107, -270.137, 0, 384.791)
 mesh = ExtResource("19_f4yfp")
 
 [node name="sportsball1" parent="." instance=ExtResource("26_mcxfw")]
@@ -110,6 +115,12 @@ mesh = ExtResource("30_gdy2b")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -11.9988, -3.05176e-05, 628.87)
 mesh = ExtResource("22_gd064")
 
+[node name="suitcase2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.95614, 0, 0, 0, 1.95614, 0, 0, 0, 1.95614, 108.174, 0, 487.788)
+mesh = ExtResource("24_f1j7g")
+skeleton = NodePath("../suitcase")
+surface_material_override/0 = SubResource("StandardMaterial3D_3m5nv")
+
 [node name="suitcase" type="MeshInstance3D" parent="."]
 transform = Transform3D(3, -7.10002e-05, -0.00198841, -8.89266e-11, -2.99809, 0.107053, -0.00198968, -0.107053, -2.99809, -109.831, 0, 613.484)
 mesh = ExtResource("24_f1j7g")
@@ -117,3 +128,9 @@ mesh = ExtResource("24_f1j7g")
 [node name="skis" type="MeshInstance3D" parent="."]
 transform = Transform3D(3, 0, 0, 0, -1.31134e-07, 3, 0, -3, -1.31134e-07, -242.911, 0, 633.274)
 mesh = ExtResource("23_y5lpq")
+
+[node name="bus1" parent="." instance=ExtResource("24_o2nfu")]
+transform = Transform3D(66.9416, 0, 74.2888, 0, 100, 0, -74.2888, 0, 66.9416, 181.321, 20, 0)
+
+[node name="bus2" parent="." instance=ExtResource("25_gxmo6")]
+transform = Transform3D(-36.3342, 0, -71.2729, 0, 80, 0, 71.2729, 0, -36.3342, 57.2008, 1.5125, 0)
