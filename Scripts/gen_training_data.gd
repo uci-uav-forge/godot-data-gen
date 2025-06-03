@@ -6,9 +6,7 @@ var brightness_min = 0.1
 var brightness_max = 1.5
 var output_folder_name = "godot_data_%d" % (int(Time.get_unix_time_from_system()))
 var position_noise = 1 # range of uniform noise added to the position of the objects. By default, they are placed randomly on a 3-unit spaced grid centered at the image center.
-var person_probability = 0.5 # probability of a person being in the image
-var max_targets_per_image = 8 # maximum number of targets in an image. The actual number will be uniformly random between 1 and this number
-var emergent_target_probability = 1.0/8 # probability of a target being a person
+var max_targets_per_image = 4 # maximum number of targets in an image. The actual number will be uniformly random between 1 and this number
 
 @onready var scene_ready = true
 @onready var index = 0
