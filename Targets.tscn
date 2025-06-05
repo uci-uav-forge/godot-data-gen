@@ -44,93 +44,93 @@ albedo_color = Color(0.233762, 0.0521615, 1.20327e-08, 1)
 [node name="Spatial" type="Node3D"]
 
 [node name="mannequin" type="MeshInstance3D" parent="."]
-transform = Transform3D(19.7757, 0, 2.98691, 0, 20, 0, -2.98691, 0, 19.7757, -100, 0, 0)
+transform = Transform3D(0.72398, 0, 0.109349, 0, 0.732191, 0, -0.109349, 0, 0.72398, 8.95026, -0.167383, -4.05502)
 mesh = ExtResource("9_ly7g3")
 
 [node name="mannequin2" type="MeshInstance3D" parent="."]
-transform = Transform3D(19.9923, -0.253375, 0.493108, -0.488542, 0.357407, 19.9908, -0.262071, -19.9952, 0.35108, -24.0091, -1.70034, 17.2411)
+transform = Transform3D(0.731909, -0.00927595, 0.0180525, -0.0178853, 0.0130845, 0.731854, -0.0095943, -0.732015, 0.0128529, 11.7322, -0.229631, -3.42382)
 mesh = ExtResource("9_ly7g3")
 skeleton = NodePath("../mannequin")
 
 [node name="car1" type="MeshInstance3D" parent="."]
-transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, -200, 0, 0)
+transform = Transform3D(1.09829, 0, 0, 0, 1.09829, 0, 0, 0, 1.09829, 5.2893, -0.167383, -4.05502)
 material_override = SubResource("StandardMaterial3D_7tup8")
 mesh = ExtResource("11_ch5ak")
 
 [node name="car2" parent="." instance=ExtResource("14_8u0eo")]
-transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -317.246, -6.6985, 160.15)
+transform = Transform3D(0.915239, 0, 0, 0, 0.915239, 0, 0, 0, 0.915239, 0.996982, -0.412613, 1.80801)
 
 [node name="motorcycle" parent="." instance=ExtResource("25_cunyh")]
-transform = Transform3D(500, 0, 0, 0, 500, 0, 0, 0, 500, -59.5313, 0, -13.1932)
+transform = Transform3D(18.3048, 0, 0, 0, 18.3048, 0, 0, 0, 18.3048, 10.4318, -0.167383, -4.53801)
 
 [node name="boat" type="MeshInstance3D" parent="."]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -428.866, 0, -27.7132)
+transform = Transform3D(0.366096, 0, 0, 0, 0.366096, 0, 0, 0, 0.366096, -3.08939, -0.167383, -5.06958)
 material_override = SubResource("StandardMaterial3D_5urbe")
 mesh = ExtResource("13_hoo6g")
 
 [node name="plane1" parent="." instance=ExtResource("16_211by")]
-transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -742.151, 13, 22.1706)
+transform = Transform3D(0.915239, 0, 0, 0, 0.915239, 0, 0, 0, 0.915239, -14.5586, 0.308542, -3.24336)
 
 [node name="stopsign" parent="." instance=ExtResource("15_s76kx")]
-transform = Transform3D(5.73206e-12, 0.000131134, -3000, 3000, -0.000131134, 0, -0.000131134, -3000, -0.000131134, -21.2227, 0, 436.594)
+transform = Transform3D(2.09848e-13, 4.80076e-06, -109.829, 109.829, -4.80076e-06, 0, -4.80076e-06, -109.829, -4.80076e-06, 11.8343, -0.167383, 11.9285)
 
 [node name="snowboard" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -127.677, 0, 343.102)
+transform = Transform3D(0.0366096, 0, 0, 0, -1.60025e-09, 0.0366096, 0, -0.0366096, -1.60025e-09, 7.93701, -0.167383, 8.50579)
 mesh = ExtResource("18_raqpw")
 
 [node name="umbrella" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -0.707107, 0.707107, 0, -0.707107, -0.707107, -270.137, 0, 384.791)
+transform = Transform3D(0.0366096, 0, 0, 0, -0.0258869, 0.0258869, 0, -0.0258869, -0.0258869, 2.72162, -0.167383, 10.032)
 mesh = ExtResource("19_f4yfp")
 
 [node name="sportsball1" parent="." instance=ExtResource("26_mcxfw")]
-transform = Transform3D(12, 0, 0, 0, 12, 0, 0, 0, 12, -412.029, 0, 303.444)
+transform = Transform3D(0.439315, 0, 0, 0, 0.439315, 0, 0, 0, 0.439315, -2.47298, -0.167383, 7.05393)
 
 [node name="sportsball2" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.025, 0, 0, 0, 0.025, 0, 0, 0, 0.025, -406.514, -0.785019, 438.692)
+transform = Transform3D(0.000915239, 0, 0, 0, 0.000915239, 0, 0, 0, 0.000915239, -2.27108, -0.196123, 12.0053)
 material_override = SubResource("StandardMaterial3D_vwnci")
 mesh = ExtResource("28_rvuah")
 
 [node name="sportsball3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -499, -1.19154, 307.843)
+transform = Transform3D(0.0549143, 0, 0, 0, 0.0549143, 0, 0, 0, 0.0549143, -5.65696, -0.211004, 7.21498)
 mesh = ExtResource("29_8keae")
 
 [node name="sportsball4" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -504.382, 0, 389.209)
+transform = Transform3D(0.0183048, 0, 0, 0, 0.0183048, 0, 0, 0, 0.0183048, -5.85399, -0.167383, 10.1938)
 material_override = SubResource("StandardMaterial3D_vx04g")
 mesh = ExtResource("8_x0170")
 
 [node name="baseballbat" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -464.747, 0, 464.667)
+transform = Transform3D(0.0366096, 0, 0, 0, 0.0366096, 0, 0, 0, 0.0366096, -4.40298, -0.167383, 12.9562)
 mesh = ExtResource("20_7ihbl")
 
 [node name="mattress" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -805.918, 0, 461.762)
+transform = Transform3D(0.0366096, 0, 0, 0, -1.60025e-09, 0.0366096, 0, -0.0366096, -1.60025e-09, -16.8931, -0.167383, 12.8499)
 mesh = ExtResource("21_86thq")
 
 [node name="mattress2" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -1053.79, 50.8766, 511.867)
+transform = Transform3D(0.00366096, 0, 0, 0, 0.00366096, 0, 0, 0, 0.00366096, -25.9676, 1.69519, 14.6842)
 mesh = ExtResource("30_gdy2b")
 
 [node name="tennisracket" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -11.9988, -3.05176e-05, 628.87)
+transform = Transform3D(0.0366096, 0, 0, 0, -1.60025e-09, 0.0366096, 0, -0.0366096, -1.60025e-09, 12.1719, -0.167385, 18.9676)
 mesh = ExtResource("22_gd064")
 
 [node name="suitcase2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.95614, 0, 0, 0, 1.95614, 0, 0, 0, 1.95614, 108.174, 0, 487.788)
+transform = Transform3D(0.0716134, 0, 0, 0, 0.0716134, 0, 0, 0, 0.0716134, 16.5714, -0.167383, 13.8027)
 mesh = ExtResource("24_f1j7g")
 skeleton = NodePath("../suitcase")
 surface_material_override/0 = SubResource("StandardMaterial3D_3m5nv")
 
 [node name="suitcase" type="MeshInstance3D" parent="."]
-transform = Transform3D(3, -7.10002e-05, -0.00198841, -8.89266e-11, -2.99809, 0.107053, -0.00198968, -0.107053, -2.99809, -109.831, 0, 613.484)
+transform = Transform3D(0.109829, -2.59929e-06, -7.27948e-05, -3.25556e-12, -0.109759, 0.00391916, -7.28413e-05, -0.00391916, -0.109759, 8.59035, -0.167383, 18.4044)
 mesh = ExtResource("24_f1j7g")
 
 [node name="skis" type="MeshInstance3D" parent="."]
-transform = Transform3D(3, 0, 0, 0, -1.31134e-07, 3, 0, -3, -1.31134e-07, -242.911, 0, 633.274)
+transform = Transform3D(0.109829, 0, 0, 0, -4.80076e-09, 0.109829, 0, -0.109829, -4.80076e-09, 3.71834, -0.167383, 19.1289)
 mesh = ExtResource("23_y5lpq")
 
 [node name="bus1" parent="." instance=ExtResource("24_o2nfu")]
-transform = Transform3D(66.9416, 0, 74.2888, 0, 100, 0, -74.2888, 0, 66.9416, 181.321, 20, 0)
+transform = Transform3D(2.4507, 0, 2.71968, 0, 3.66095, 0, -2.71968, 0, 2.4507, 19.2493, 0.564809, -4.05502)
 
 [node name="bus2" parent="." instance=ExtResource("25_gxmo6")]
-transform = Transform3D(-36.3342, 0, -71.2729, 0, 80, 0, 71.2729, 0, -36.3342, 57.2008, 1.5125, 0)
+transform = Transform3D(-1.33018, 0, -2.60927, 0, 2.92876, 0, 2.60927, 0, -1.33018, 14.7053, -0.112011, -4.05502)

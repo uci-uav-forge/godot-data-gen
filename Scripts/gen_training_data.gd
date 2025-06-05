@@ -6,7 +6,7 @@ var brightness_min = 0.1
 var brightness_max = 1.5
 var output_folder_name = "godot_data_%d" % (int(Time.get_unix_time_from_system()))
 var position_noise = 1 # range of uniform noise added to the position of the objects. By default, they are placed randomly on a 3-unit spaced grid centered at the image center.
-var max_targets_per_image = 4 # maximum number of targets in an image. The actual number will be uniformly random between 1 and this number
+var max_targets_per_image = 2 # maximum number of targets in an image. The actual number will be uniformly random between 1 and this number
 
 @onready var scene_ready = true
 @onready var index = 0
@@ -38,13 +38,13 @@ func _ready():
 		bg_mat.albedo_texture = background
 		backgrounds_list.append(bg_mat)
 
-func generatePositions(spacing: int = 3):
+func generatePositions(spacing: int = 5):
 	var positions = []
 	# ensures that the grid spans *most* of the FOV, erring on the side of caution because we don't want to place objects outside the image.
 	var positions_grid_range = self.position.y * (tan(deg_to_rad(max_rotation)) - tan(deg_to_rad(max_rotation - self.fov/2))) * 0.7
 	for x in range(-positions_grid_range, positions_grid_range, spacing):
 		for z in range(-positions_grid_range, positions_grid_range, spacing):
-			positions.append(Vector3(x,0,z))
+			positions.append(Vector3(x,0.2,z))
 	positions.shuffle()
 	return positions
 
@@ -78,8 +78,8 @@ func gen_train_image():
 	var target_labels = target_objects_and_labels[1]
 	print(target_labels)
 	
-	self.fov = randi_range(30,60)
-	self.rotation_degrees = Vector3(-90+randi_range(-max_rotation, max_rotation), randi_range(0,360), 0)
+	self.fov = randi_range(70, 80)
+	#self.rotation_degrees = Vector3(-90+randi_range(-max_rotation, max_rotation), randi_range(0,360), 0)
 	var dist_from_center = self.position.y * tan(-PI/2-self.rotation.x)
 	var picture_center = Vector3(0,0,dist_from_center).rotated(Vector3.UP, self.rotation.y)
 	
@@ -97,7 +97,7 @@ func gen_train_image():
 	global_light.rotation_degrees = Vector3(randi_range(-30, -150), randi_range(0,360), 0)
 	
 	world_floor.material_override = backgrounds_list[randi()%len(backgrounds_list)]
-	world_floor.scale = Vector3(randi_range(50, 100), 0.001, randi_range(50, 100))
+	#world_floor.scale = Vector3(randi_range(50, 100), 0.001, randi_range(50, 100))
 	
 	await get_tree().process_frame
 	Helpers.takeScreenshot(self, "images/image%s.png" % index, output_folder_name)

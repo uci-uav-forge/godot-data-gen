@@ -3,6 +3,7 @@ import sys
 import cv2
 import numpy as np
 from tqdm import tqdm
+from data_gen_utils import preprocess_img
 
 def apply_color_augmentation(img):
     """Overlay random shapes (circles and rectangles) on the image."""
@@ -54,6 +55,7 @@ def process_images(folder_path):
                 continue
             try:
                 aug = apply_color_augmentation(img)
+                aug = preprocess_img(aug)
                 save_image(dir, file, aug)
             except Exception as e:
                 print(f"Error on {path}: {e}")
