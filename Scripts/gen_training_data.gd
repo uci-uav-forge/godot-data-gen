@@ -28,15 +28,35 @@ func _ready():
 	res_directory.make_dir("images")
 	res_directory.make_dir("masks")
 	
-	
 	print("Results Directory: %s" % res_directory.get_current_dir())
 	
+	# Initialize shared FastNoiseLite in set_meta
+	var fast_noise = FastNoiseLite.new()
+	fast_noise.noise_type = FastNoiseLite.TYPE_PERLIN
+	fast_noise.frequency = 0.03  # Controls how bumpy the noise pattern is
+	var noise_image = fast_noise.get_image(512, 512, false, false)
+	var noise_tex = ImageTexture.create_from_image(noise_image)
+	self.set_meta("shared_noise_tex", noise_tex)
+	
 	var backgrounds_directory_list = Helpers.list_files_in_directory("res://backgrounds")
+	var perlin_shader := preload("res://Scripts/perlin_shader.gdshader")
 	for background_path in backgrounds_directory_list:
-		var background = load("res://backgrounds/%s" % background_path)
-		var bg_mat = StandardMaterial3D.new()
-		bg_mat.albedo_texture = background
-		backgrounds_list.append(bg_mat)
+		var full_path = "res://backgrounds/%s" % background_path # no file error checking
+
+		var tex_img = Image.new()
+		var err = tex_img.load(full_path)
+		if err != OK:
+			print("Failed to load:", full_path)
+			continue
+
+		var tex = ImageTexture.create_from_image(tex_img)
+		var mat := ShaderMaterial.new()
+		mat.shader = perlin_shader
+		mat.set_shader_parameter("base_tex", tex)
+		mat.set_shader_parameter("noise_strength", 0.3)  
+		mat.set_shader_parameter("noise_scale", 8.0)      
+		backgrounds_list.append(mat) 
+	
 
 func generatePositions(spacing: int = 5):
 	var positions = []
@@ -60,10 +80,12 @@ func prepForSegmentation(node, color: Color):
 
 
 func get_target_objects_and_labels():
+	var num_shapes = randi()%(max_targets_per_image+1)
+	if (num_shapes == 0):
+		num_shapes = 1
+		
 	var target_objects = []
 	var target_labels = []
-	
-	var num_shapes = randi()%(max_targets_per_image+1)
 	for _i in range(num_shapes):
 		var target = Helpers.gen_targets(root)
 		target_objects.append(target[0])
@@ -96,7 +118,14 @@ func gen_train_image():
 	global_light.light_energy = randf_range(brightness_min, brightness_max)
 	global_light.rotation_degrees = Vector3(randi_range(-30, -150), randi_range(0,360), 0)
 	
-	world_floor.material_override = backgrounds_list[randi()%len(backgrounds_list)]
+	var mat = backgrounds_list[randi()%len(backgrounds_list)].duplicate()
+	mat.set_shader_parameter("noise_strength", randf_range(0.3, 0.5))
+	mat.set_shader_parameter("noise_scale", randf_range(3.0, 6.0))
+	mat.set_shader_parameter("noise_tex", self.get_meta("shared_noise_tex")) 
+	#mat.set_shader_parameter("time_seed", randf() * 1000.0)              # Random static offset
+	world_floor.material_override = mat
+
+	#world_floor.material_override = backgrounds_list[randi()%len(backgrounds_list)]
 	#world_floor.scale = Vector3(randi_range(50, 100), 0.001, randi_range(50, 100))
 	
 	await get_tree().process_frame

@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://ct4nj2i38log5"]
 
-[ext_resource type="Texture2D" uid="uid://vp42foki8knv" path="res://backgrounds/maryland_2170.jpg" id="1_e1nub"]
+[ext_resource type="Texture2D" uid="uid://btlxgjhd7re4x" path="res://backgrounds/maryland_2170.jpg" id="1_e1nub"]
 [ext_resource type="Script" path="res://Scripts/gen_training_data.gd" id="2_3gmy4"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_1ifvu"]
