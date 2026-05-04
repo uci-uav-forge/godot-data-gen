@@ -12,3 +12,5 @@ To run this you need to import this repo in the Godot game engine (tested on 4.1
 ## Misc.
 
 Character models are from https://sketchfab.com/apatel/collections/dl-humanoid-characters-2912fdee14b24cafaaa26f3a961b6606
+
+Tent model is from https://sketchfab.com/3d-models/tent-9006af5d7af4491dbb573fdddaf8b30b
