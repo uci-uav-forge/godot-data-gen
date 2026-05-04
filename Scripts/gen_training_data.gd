@@ -18,6 +18,8 @@ var res_directory
 
 
 func _ready():
+	get_viewport().size = Vector2(1280, 720) #set camera/viewport size
+
 	set_physics_process(false)
 	randomize()
 	

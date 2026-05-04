@@ -102,7 +102,7 @@ def main():
     for i in tqdm(range(num_images)):
         gen_img(i, num_images, INPUT_DIR, output_dir, shapes_to_categories)
     
-    yolo_cmd = f'yolo detect train data={output_dir}/dataset_config.yaml model=yolo11n.pt epochs=100 imgsz=640'
+    yolo_cmd = f'yolo detect train data={output_dir}/dataset_config.yaml model=yolo11n.pt epochs=100 imgsz=1280'
     print(yolo_cmd)
 if __name__ == "__main__":
     main()
