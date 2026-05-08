@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://dwoafodpf0ww6"]
 
-[ext_resource type="PackedScene" uid="uid://dewl1p4h7r5ga" path="res://3dNew/tent/tent.gltf" id="2_wvm3o"]
+[ext_resource type="PackedScene" uid="uid://cc6a2afrc5ktx" path="res://3dNew/ezup_tnt_tbd/ezup.glb" id="2_wvm3o"]
 [ext_resource type="ArrayMesh" uid="uid://c4kyr075unan" path="res://3dNew/mannequin/WoodenLarry.obj" id="9_ly7g3"]
 
 [node name="Spatial" type="Node3D" unique_id=2126678058]
 
 [node name="mannequin" type="MeshInstance3D" parent="." unique_id=1527304123]
-transform = Transform3D(0.49439257, 0, 0.074672416, 0, 0.5, 0, -0.074672416, 0, 0.49439257, 8.95026, -0.167383, -4.05502)
+transform = Transform3D(0.49437815, -0.07476767, -3.2681986e-09, 0, -2.1855694e-08, 0.49999997, -0.074767664, -0.49437818, -2.1609955e-08, 8.95, 0.2, -4.055)
 mesh = ExtResource("9_ly7g3")
 
-[node name="tent" parent="." unique_id=1890341047 instance=ExtResource("2_wvm3o")]
-transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 17.649555, -9.536743e-07, 5.926215)
+[node name="tent" parent="." unique_id=1245904982 instance=ExtResource("2_wvm3o")]
+transform = Transform3D(6, 0, 0, 0, 8, 0, 0, 0, 6, 6.498, 3, 6.345)

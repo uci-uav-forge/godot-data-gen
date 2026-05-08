@@ -44,40 +44,71 @@ INPUT_DIR = dataset_dirs[dir_index]
 
 
 def gen_img(num, num_images, input_dir, output_dir, shapes_to_categories):
-    if int(num)<0.85*num_images:
+    if int(num) < 0.85 * num_images:
         split_name = "train"
-    elif int(num)<0.95*num_images:
+    elif int(num) < 0.95 * num_images:
         split_name = "validation"
     else:
-        split_name = "test" 
-    img = cv2.imread(f"{input_dir}/images/image{num}.png")
+        split_name = "test"
+
+    img_path = input_dir / "images" / f"image{num}.png"
+    img = cv2.imread(str(img_path))
     if img is None:
-        tqdm.write(f"image read error for {input_dir}/images/image{num}.png")
+        tqdm.write(f"image read error for {img_path}")
         return
+
     img = preprocess_img(img)
     file_contents = ""
-    for mask_file_name in os.listdir(f"{input_dir}/masks/{num}"):
-        mask_path = f"{input_dir}/masks/{num}/{mask_file_name}"
-        shape_name = mask_file_name.split("_")[0].split(",")[0] 
-        shape_name = "".join(filter(lambda c: c.isalpha(), shape_name))
-        mask = cv2.imread(mask_path)
-        polygon = get_polygon(mask)
+    mask_dir = input_dir / "masks" / str(num)
+    if not mask_dir.exists():
+        tqdm.write(f"mask directory missing: {mask_dir}")
+        return
 
-        if len(polygon) <= 2:
+    for mask_file_name in os.listdir(mask_dir):
+        mask_path = mask_dir / mask_file_name
+        shape_name = mask_file_name.split("_")[0].split(",")[0]
+        shape_name = "".join(filter(lambda c: c.isalpha(), shape_name))
+
+        if shape_name not in shapes_to_categories:
+            tqdm.write(f"unknown shape '{shape_name}' in {mask_path}")
+            continue
+
+        mask = cv2.imread(str(mask_path), cv2.IMREAD_GRAYSCALE)
+        if mask is None:
+            tqdm.write(f"mask read error for {mask_path}")
+            continue
+
+        white_pixels = np.where(mask > 127)
+        if len(white_pixels[0]) == 0:
             if os.getenv("VERBOSE") is not None:
-                tqdm.write(f"no polygon found for {mask_path}")
-            return 
-        normalized_polygon = polygon / np.array([mask.shape[1], mask.shape[0]])
-        file_contents+=f"{shapes_to_categories[shape_name]} {' '.join(map(str, normalized_polygon.flatten()))}\n"
-    with open(f"{output_dir}/labels/{split_name}/image{num}.txt", "w") as f:
+                tqdm.write(f"no mask found for {mask_path}")
+            continue
+
+        y_min, y_max = white_pixels[0].min(), white_pixels[0].max()
+        x_min, x_max = white_pixels[1].min(), white_pixels[1].max()
+
+        x_center = ((x_min + x_max) / 2) / mask.shape[1]
+        y_center = ((y_min + y_max) / 2) / mask.shape[0]
+        width = (x_max - x_min) / mask.shape[1]
+        height = (y_max - y_min) / mask.shape[0]
+
+        file_contents += (
+            f"{shapes_to_categories[shape_name]} {x_center:.6f} {y_center:.6f} "
+            f"{width:.6f} {height:.6f}\n"
+        )
+
+    label_file = output_dir / "labels" / split_name / f"image{num}.txt"
+    with open(label_file, "w") as f:
         f.write(file_contents)
-    cv2.imwrite(f"{output_dir}/images/{split_name}/image{num}.png", img)
+
+    cv2.imwrite(str(output_dir / "images" / split_name / f"image{num}.png"), img)
+
 
 def main():
     datagen_dir = os.path.dirname(os.path.abspath(__file__))
     categories_to_shapes = json.load(open(f"{datagen_dir}/shape_name_labels.json","r"))
     shapes_to_categories = {shape:category for category, shape in categories_to_shapes.items()}
-    output_dir = f"{INPUT_DIR}/yolo"
+    output_dir = Path(f"{INPUT_DIR}/yolo")
     os.makedirs(output_dir, exist_ok=True)
     for split_name in ["train", "validation", "test"]:
         os.makedirs(f"{output_dir}/labels/{split_name}", exist_ok=True)
