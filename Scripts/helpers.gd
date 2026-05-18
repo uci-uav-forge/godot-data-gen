@@ -17,12 +17,22 @@ static func place_target(target, position):
 static var targets = preload("res://Targets.tscn").instantiate().get_children()
 
 static func gen_targets(root):
-	var i = randi_range(0,len(targets)-1)
-	var target = targets[i].duplicate() # randomly chosen
-	var name = targets[i].name
+	var classes = {}
+	for t in targets:
+		var label = t.name.rstrip("0123456789")
+		if not classes.has(label):
+			classes[label] = []
+		classes[label].append(t)
+	
+	var class_names = classes.keys()
+	var chosen_class = class_names[randi() % class_names.size()]
+	var variants = classes[chosen_class]
+	var chosen = variants[randi() % variants.size()]
+	
+	var target = chosen.duplicate()
 	target.scale = target.scale
 	root.add_child(target)
-	return [target, name]
+	return [target, chosen_class]
 
 static func get_symbol_objects(symbols):
 	var opensans_bold_font = preload("res://fonts/OpenSans/OpenSans-Bold.ttf")

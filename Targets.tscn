@@ -1,12 +1,136 @@
 [gd_scene format=3 uid="uid://dwoafodpf0ww6"]
 
-[ext_resource type="PackedScene" uid="uid://d4lw77gvdraod" path="res://3dNew/male_mannequin/source/model.glb" id="2_4atrq"]
+[ext_resource type="PackedScene" uid="uid://ch8xlxyc8nvfj" path="res://3dNew/Characters_psx/Models/Male/Character_01.fbx" id="2_2t8vg"]
 [ext_resource type="PackedScene" uid="uid://cc6a2afrc5ktx" path="res://3dNew/ezup_tnt_tbd/ezup.glb" id="2_wvm3o"]
+[ext_resource type="PackedScene" uid="uid://cvporerd6r08l" path="res://3dNew/Characters_psx/Models/Male/Character_02.fbx" id="3_kxknv"]
+[ext_resource type="PackedScene" uid="uid://kasfbxc2qswm" path="res://3dNew/Characters_psx/Models/Male/Character_03.fbx" id="4_fcr43"]
+[ext_resource type="PackedScene" uid="uid://qelpiw76lhmg" path="res://3dNew/Characters_psx/Models/Male/Character_04.fbx" id="5_m3x7a"]
+[ext_resource type="PackedScene" uid="uid://nyidk1fegvas" path="res://3dNew/Characters_psx/Models/Male/Character_05.fbx" id="6_83yu3"]
+[ext_resource type="PackedScene" uid="uid://xxjwm7i8uvmh" path="res://3dNew/Characters_psx/Models/Male/Character_06.fbx" id="7_obhv8"]
+[ext_resource type="PackedScene" uid="uid://d4atd7xl58qpl" path="res://3dNew/Characters_psx/Models/Male/Character_07.fbx" id="8_w520x"]
+[ext_resource type="PackedScene" uid="uid://d36b1ggx0krb2" path="res://3dNew/Characters_psx/Models/Male/Character_08.fbx" id="9_bgpyj"]
+[ext_resource type="PackedScene" uid="uid://bmk441bspke4y" path="res://3dNew/Characters_psx/Models/Male/Character_09.fbx" id="10_pqtp5"]
+[ext_resource type="PackedScene" uid="uid://cflkwd30gxbe4" path="res://3dNew/Characters_psx/Models/Male/Character_10.fbx" id="11_gdn0r"]
+[ext_resource type="PackedScene" uid="uid://c5chv2ds132hy" path="res://3dNew/Characters_psx/Models/Male/Character_11.fbx" id="12_jg4v5"]
+[ext_resource type="PackedScene" uid="uid://bwjkkb2b8yuu8" path="res://3dNew/Characters_psx/Models/Male/Character_12.fbx" id="13_i51ad"]
+[ext_resource type="PackedScene" uid="uid://mkhr5ioj6g0p" path="res://3dNew/Characters_psx/Models/Male/Character_13.fbx" id="14_h3m3n"]
+[ext_resource type="PackedScene" uid="uid://b4hoaji8oydw2" path="res://3dNew/Characters_psx/Models/Male/Character_14.fbx" id="15_nw78j"]
+[ext_resource type="PackedScene" uid="uid://di02kab1eak5k" path="res://3dNew/Characters_psx/Models/Male/Character_15.fbx" id="16_h6y0k"]
+[ext_resource type="PackedScene" uid="uid://12voqgg2b8i7" path="res://3dNew/Characters_psx/Models/Male/Character_16.fbx" id="17_tlfmu"]
+[ext_resource type="PackedScene" uid="uid://ccke2qoonahe6" path="res://3dNew/Characters_psx/Models/Male/Character_17_Police.fbx" id="18_4ad5x"]
+[ext_resource type="PackedScene" uid="uid://cbrowop36n1ou" path="res://3dNew/Characters_psx/Models/Male/Character_18_Police.fbx" id="19_ilc44"]
+[ext_resource type="PackedScene" uid="uid://djkdhvwm26433" path="res://3dNew/Characters_psx/Models/Male/Character_19_Police.fbx" id="20_107w6"]
+[ext_resource type="PackedScene" uid="uid://b4xitwqrgna84" path="res://3dNew/Characters_psx/Models/Male/Character_20_Police.fbx" id="21_xmcpc"]
+[ext_resource type="PackedScene" uid="uid://dku66lh20v8kb" path="res://3dNew/Characters_psx/Models/Male/Character_21_Police.fbx" id="22_7ckpq"]
+[ext_resource type="PackedScene" uid="uid://qep4mga1cc3h" path="res://3dNew/Characters_psx/Models/Male/Character_22_Police.fbx" id="23_pblsq"]
+[ext_resource type="PackedScene" uid="uid://chw0l26aut17y" path="res://3dNew/Characters_psx/Models/Male/Character_23_Firefighter.fbx" id="24_f5biv"]
+[ext_resource type="PackedScene" uid="uid://b1q36o5yuqlgi" path="res://3dNew/Characters_psx/Models/Male/Character_24_Firefighter.fbx" id="25_e73s5"]
+[ext_resource type="PackedScene" uid="uid://bkoau0a8kvr0s" path="res://3dNew/Characters_psx/Models/Male/Character_25_Doctor.fbx" id="26_6l1da"]
+[ext_resource type="PackedScene" uid="uid://dxnq0wfnnp0oe" path="res://3dNew/Characters_psx/Models/Male/Character_26_Doctor.fbx" id="27_3ca3p"]
+[ext_resource type="PackedScene" uid="uid://i754uojyfabi" path="res://3dNew/Characters_psx/Models/Male/Character_27_HM.fbx" id="28_rg23g"]
+[ext_resource type="PackedScene" uid="uid://dmj81bv533evl" path="res://3dNew/Characters_psx/Models/Male/Character_28_HM.fbx" id="29_8gyl4"]
+[ext_resource type="PackedScene" uid="uid://bclhwun1a3hl" path="res://3dNew/Characters_psx/Models/Male/Character_29.fbx" id="30_1v17d"]
+[ext_resource type="PackedScene" uid="uid://cux7u24kcmf3p" path="res://3dNew/Characters_psx/Models/Male/Character_30.fbx" id="31_cfcfi"]
+[ext_resource type="PackedScene" uid="uid://bpbr3ols5x3wr" path="res://3dNew/Characters_psx/Models/Male/Character_31.fbx" id="32_j5c6d"]
+[ext_resource type="PackedScene" uid="uid://b4l8vih2xkomx" path="res://3dNew/Characters_psx/Models/Male/Character_32.fbx" id="33_4gp3k"]
 
 [node name="Spatial" type="Node3D" unique_id=2126678058]
 
 [node name="tent" parent="." unique_id=1245904982 instance=ExtResource("2_wvm3o")]
 transform = Transform3D(2.625, 0, 0, 0, 3.5, 0, 0, 0, 2.625, 6.498, 1.5, 6.345)
 
-[node name="mannequin" parent="." unique_id=257847962 instance=ExtResource("2_4atrq")]
-transform = Transform3D(1.5, 0, 0, 0, -6.556708e-08, 1.5, 0, -1.5, -6.556708e-08, 5.034, 0.33210897, -2.2078342)
+[node name="mannequin" parent="." unique_id=830913763 instance=ExtResource("2_2t8vg")]
+transform = Transform3D(-1.5298985e-08, 0.35, 0, 1.5298985e-08, 6.687399e-16, 0.35, 0.35, 1.5298985e-08, -1.5298985e-08, -2.0205245, 0.18823099, -5.358609)
+
+[node name="mannequin2" parent="." unique_id=1074600849 instance=ExtResource("3_kxknv")]
+transform = Transform3D(-1.5298985e-08, 0.35, 0, 1.5298985e-08, 6.687399e-16, 0.35, 0.35, 1.5298985e-08, -1.5298985e-08, -2.0205245, 0.18823099, -5.358609)
+
+[node name="mannequin3" parent="." unique_id=599633894 instance=ExtResource("4_fcr43")]
+transform = Transform3D(-1.5298985e-08, 0.35, 0, 1.5298985e-08, 6.687399e-16, 0.35, 0.35, 1.5298985e-08, -1.5298985e-08, -2.0205245, 0.18823099, -5.358609)
+
+[node name="mannequin4" parent="." unique_id=797204067 instance=ExtResource("5_m3x7a")]
+transform = Transform3D(-1.5298985e-08, 0.35, 0, 1.5298985e-08, 6.687399e-16, 0.35, 0.35, 1.5298985e-08, -1.5298985e-08, -2.0205245, 0.18823099, -5.358609)
+
+[node name="mannequin5" parent="." unique_id=549060231 instance=ExtResource("6_83yu3")]
+transform = Transform3D(-1.5298985e-08, 0.35, 0, 1.5298985e-08, 6.687399e-16, 0.35, 0.35, 1.5298985e-08, -1.5298985e-08, -2.0205245, 0.18823099, -5.358609)
+
+[node name="mannequin6" parent="." unique_id=1637357932 instance=ExtResource("7_obhv8")]
+transform = Transform3D(-1.5298985e-08, 0.35, 0, 1.5298985e-08, 6.687399e-16, 0.35, 0.35, 1.5298985e-08, -1.5298985e-08, -2.0205245, 0.18823099, -5.358609)
+
+[node name="mannequin7" parent="." unique_id=1487327103 instance=ExtResource("8_w520x")]
+transform = Transform3D(-1.5298985e-08, 0.35, 0, 1.5298985e-08, 6.687399e-16, 0.35, 0.35, 1.5298985e-08, -1.5298985e-08, -2.0205245, 0.18823099, -5.358609)
+
+[node name="mannequin8" parent="." unique_id=66128768 instance=ExtResource("9_bgpyj")]
+transform = Transform3D(-1.5298985e-08, 0.35, 0, 1.5298985e-08, 6.687399e-16, 0.35, 0.35, 1.5298985e-08, -1.5298985e-08, -2.0205245, 0.18823099, -5.358609)
+
+[node name="mannequin9" parent="." unique_id=132344777 instance=ExtResource("10_pqtp5")]
+transform = Transform3D(-1.5298985e-08, 0.35, 0, 1.5298985e-08, 6.687399e-16, 0.35, 0.35, 1.5298985e-08, -1.5298985e-08, -2.0205245, 0.18823099, -5.358609)
+
+[node name="mannequin10" parent="." unique_id=253928282 instance=ExtResource("11_gdn0r")]
+transform = Transform3D(-1.5298985e-08, 0.35, 0, 1.5298985e-08, 6.687399e-16, 0.35, 0.35, 1.5298985e-08, -1.5298985e-08, -2.0205245, 0.18823099, -5.358609)
+
+[node name="mannequin11" parent="." unique_id=1993780185 instance=ExtResource("12_jg4v5")]
+transform = Transform3D(-1.5298985e-08, 0.35, 0, 1.5298985e-08, 6.687399e-16, 0.35, 0.35, 1.5298985e-08, -1.5298985e-08, -2.0205245, 0.18823099, -5.358609)
+
+[node name="mannequin12" parent="." unique_id=1942415236 instance=ExtResource("13_i51ad")]
+transform = Transform3D(-1.5298985e-08, 0.35, 0, 1.5298985e-08, 6.687399e-16, 0.35, 0.35, 1.5298985e-08, -1.5298985e-08, -2.0205245, 0.18823099, -5.358609)
+
+[node name="mannequin13" parent="." unique_id=272728787 instance=ExtResource("14_h3m3n")]
+transform = Transform3D(-1.5298985e-08, 0.35, 0, 1.5298985e-08, 6.687399e-16, 0.35, 0.35, 1.5298985e-08, -1.5298985e-08, -2.0205245, 0.18823099, -5.358609)
+
+[node name="mannequin14" parent="." unique_id=91338965 instance=ExtResource("15_nw78j")]
+transform = Transform3D(-1.5298985e-08, 0.35, 0, 1.5298985e-08, 6.687399e-16, 0.35, 0.35, 1.5298985e-08, -1.5298985e-08, -2.0205245, 0.18823099, -5.358609)
+
+[node name="mannequin15" parent="." unique_id=743268840 instance=ExtResource("16_h6y0k")]
+transform = Transform3D(-1.5298985e-08, 0.35, 0, 1.5298985e-08, 6.687399e-16, 0.35, 0.35, 1.5298985e-08, -1.5298985e-08, -2.0205245, 0.18823099, -5.358609)
+
+[node name="mannequin16" parent="." unique_id=227237064 instance=ExtResource("17_tlfmu")]
+transform = Transform3D(-1.5298985e-08, 0.35, 0, 1.5298985e-08, 6.687399e-16, 0.35, 0.35, 1.5298985e-08, -1.5298985e-08, -2.0205245, 0.18823099, -5.358609)
+
+[node name="mannequin17" parent="." unique_id=1684086184 instance=ExtResource("18_4ad5x")]
+transform = Transform3D(-1.5298985e-08, 0.35, 0, 1.5298985e-08, 6.687399e-16, 0.35, 0.35, 1.5298985e-08, -1.5298985e-08, -2.0205245, 0.18823099, -5.358609)
+
+[node name="mannequin18" parent="." unique_id=2078102521 instance=ExtResource("19_ilc44")]
+transform = Transform3D(-1.5298985e-08, 0.35, 0, 1.5298985e-08, 6.687399e-16, 0.35, 0.35, 1.5298985e-08, -1.5298985e-08, -2.0205245, 0.18823099, -5.358609)
+
+[node name="mannequin19" parent="." unique_id=121072493 instance=ExtResource("20_107w6")]
+transform = Transform3D(-1.5298985e-08, 0.35, 0, 1.5298985e-08, 6.687399e-16, 0.35, 0.35, 1.5298985e-08, -1.5298985e-08, -2.0205245, 0.18823099, -5.358609)
+
+[node name="mannequin20" parent="." unique_id=383022230 instance=ExtResource("21_xmcpc")]
+transform = Transform3D(-1.5298985e-08, 0.35, 0, 1.5298985e-08, 6.687399e-16, 0.35, 0.35, 1.5298985e-08, -1.5298985e-08, -2.0205245, 0.18823099, -5.358609)
+
+[node name="mannequin21" parent="." unique_id=1421963036 instance=ExtResource("22_7ckpq")]
+transform = Transform3D(-1.5298985e-08, 0.35, 0, 1.5298985e-08, 6.687399e-16, 0.35, 0.35, 1.5298985e-08, -1.5298985e-08, -2.0205245, 0.18823099, -5.358609)
+
+[node name="mannequin22" parent="." unique_id=2138592608 instance=ExtResource("23_pblsq")]
+transform = Transform3D(-1.5298985e-08, 0.35, 0, 1.5298985e-08, 6.687399e-16, 0.35, 0.35, 1.5298985e-08, -1.5298985e-08, -2.0205245, 0.18823099, -5.358609)
+
+[node name="mannequin23" parent="." unique_id=1855078209 instance=ExtResource("24_f5biv")]
+transform = Transform3D(-1.5298985e-08, 0.35, 0, 1.5298985e-08, 6.687399e-16, 0.35, 0.35, 1.5298985e-08, -1.5298985e-08, -2.0205245, 0.18823099, -5.358609)
+
+[node name="mannequin24" parent="." unique_id=937091512 instance=ExtResource("25_e73s5")]
+transform = Transform3D(-1.5298985e-08, 0.35, 0, 1.5298985e-08, 6.687399e-16, 0.35, 0.35, 1.5298985e-08, -1.5298985e-08, -2.0205245, 0.18823099, -5.358609)
+
+[node name="mannequin25" parent="." unique_id=762717978 instance=ExtResource("26_6l1da")]
+transform = Transform3D(-1.5298985e-08, 0.35, 0, 1.5298985e-08, 6.687399e-16, 0.35, 0.35, 1.5298985e-08, -1.5298985e-08, -2.0205245, 0.18823099, -5.358609)
+
+[node name="mannequin26" parent="." unique_id=774419341 instance=ExtResource("27_3ca3p")]
+transform = Transform3D(-1.5298985e-08, 0.35, 0, 1.5298985e-08, 6.687399e-16, 0.35, 0.35, 1.5298985e-08, -1.5298985e-08, -2.0205245, 0.18823099, -5.358609)
+
+[node name="mannequin27" parent="." unique_id=334661453 instance=ExtResource("28_rg23g")]
+transform = Transform3D(-1.5298985e-08, 0.35, 0, 1.5298985e-08, 6.687399e-16, 0.35, 0.35, 1.5298985e-08, -1.5298985e-08, -2.0205245, 0.18823099, -5.358609)
+
+[node name="mannequin28" parent="." unique_id=2079924033 instance=ExtResource("29_8gyl4")]
+transform = Transform3D(-1.5298985e-08, 0.35, 0, 1.5298985e-08, 6.687399e-16, 0.35, 0.35, 1.5298985e-08, -1.5298985e-08, -2.0205245, 0.18823099, -5.358609)
+
+[node name="mannequin29" parent="." unique_id=390836956 instance=ExtResource("30_1v17d")]
+transform = Transform3D(-1.5298985e-08, 0.35, 0, 1.5298985e-08, 6.687399e-16, 0.35, 0.35, 1.5298985e-08, -1.5298985e-08, -2.0205245, 0.18823099, -5.358609)
+
+[node name="mannequin30" parent="." unique_id=1493322019 instance=ExtResource("31_cfcfi")]
+transform = Transform3D(-1.5298985e-08, 0.35, 0, 1.5298985e-08, 6.687399e-16, 0.35, 0.35, 1.5298985e-08, -1.5298985e-08, -2.0205245, 0.18823099, -5.358609)
+
+[node name="mannequin31" parent="." unique_id=1966726900 instance=ExtResource("32_j5c6d")]
+transform = Transform3D(-1.5298985e-08, 0.35, 0, 1.5298985e-08, 6.687399e-16, 0.35, 0.35, 1.5298985e-08, -1.5298985e-08, -2.0205245, 0.18823099, -5.358609)
+
+[node name="mannequin32" parent="." unique_id=2111050521 instance=ExtResource("33_4gp3k")]
+transform = Transform3D(-1.5298985e-08, 0.35, 0, 1.5298985e-08, 6.687399e-16, 0.35, 0.35, 1.5298985e-08, -1.5298985e-08, -2.0205245, 0.18823099, -5.358609)

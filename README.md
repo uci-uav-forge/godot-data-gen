@@ -15,4 +15,4 @@ Character models are from https://sketchfab.com/apatel/collections/dl-humanoid-c
 
 Tent Model is from https://sketchfab.com/3d-models/tent-9006af5d7af4491dbb573fdddaf8b30b
 
-Mannequin Model is from https://sketchfab.com/3d-models/male-mannequin-ffe1b352d7d24b1c9734f0f8e9f692e7#download
+Mannequin Model is from https://elbolilloduro.itch.io/characters-psx
